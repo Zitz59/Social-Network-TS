@@ -1,0 +1,12 @@
+.content{
+    grid-area: content;
+    background-color: #FF8978;
+
+    padding: 10px;
+
+}
+
+.avatar{
+    width: 70px;
+    height: 90px;
+}
