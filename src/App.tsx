@@ -1,22 +1,22 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import './App.css';
-import Header from "./Header";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Profile from "./components/Profile";
+
 
 const App = () => {
     return (
         <BrowserRouter>
-            <div className="App">
+            <div className="app-wrapper">
                 <Header/>
-                <ul>
-                    <li>css</li>
-                    <li>html</li>
-                    <li>js</li>
-                    <li>react</li>
-                </ul>
+                <Navbar/>
+                <Profile/>
+
+
             </div>
         </BrowserRouter>
     );
 }
-
 export default App;
