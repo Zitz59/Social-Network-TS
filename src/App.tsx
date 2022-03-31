@@ -6,6 +6,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className="App">
+                <Header/>
                 <ul>
                     <li>css</li>
                     <li>html</li>
@@ -17,18 +18,14 @@ const App = () => {
     );
 }
 
-
-type MessageType = {
-    message: string
-}
-
-
-function HelloMessage(props: MessageType) {
-    return <h1>{props.message}</h1>
-}
-
-function ByeMessage(props: MessageType) {
-    return <h1>{props.message}</h1>
+const Header = () => {
+    return (
+        <div>
+            <a href="#">Home</a>
+            <a href="#">News</a>
+            <a href="#">Feed</a>
+        </div>
+    )
 }
 
 export default App;
