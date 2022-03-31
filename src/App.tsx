@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import './App.css';
+import Header from "./Header";
 
 const App = () => {
     return (
@@ -16,16 +17,6 @@ const App = () => {
             </div>
         </BrowserRouter>
     );
-}
-
-const Header = () => {
-    return (
-        <div>
-            <a href="#">Home</a>
-            <a href="#">News</a>
-            <a href="#">Feed</a>
-        </div>
-    )
 }
 
 export default App;
