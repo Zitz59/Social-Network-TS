@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./Profile.module.css";
+import styles from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
-const Profile = () => {
+const MyPosts = () => {
     return (
         <div className={styles.content}>
             <div>
@@ -15,23 +16,19 @@ const Profile = () => {
                      alt=""/>
                 avatar+description
             </div>
-            <div>
+            <div className={styles.myPost}>
                 <h3>My posts</h3>
                 <div>
-                    <div>
-                        <textarea name="newPost" id="#" placeholder={'write something new'}></textarea>
+                    <div >
+                        <textarea className={styles.addPostArea} name="newPost" id="#" placeholder={'write something new'}></textarea>
                     </div>
-                    <button>Send</button>
+                    <button className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
-            <div>
-                post1
-            </div>
-            <div>
-                post2
-            </div>
+            <Post/>
+
         </div>
     )
 }
 
-export default Profile;
+export default MyPosts;
