@@ -19,13 +19,15 @@ const MyPosts = () => {
             <div className={styles.myPost}>
                 <h3>My posts</h3>
                 <div>
-                    <div >
-                        <textarea className={styles.addPostArea} name="newPost" id="#" placeholder={'write something new'}></textarea>
+                    <div>
+                        <textarea className={styles.addPostArea} name="newPost" id="#"
+                                  placeholder={'write something'}></textarea>
                     </div>
                     <button className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
-            <Post/>
+            <Post message="Hi , how are you?" likeCount={15}/>
+            <Post message="It's my first post" likeCount={20}/>
 
         </div>
     )
