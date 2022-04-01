@@ -32,19 +32,20 @@
     font-family: inherit;
     font-size: 1rem;
     line-height: 1.1;
-    color: #fff;
+    color: #000;
     font-weight: 500;
     text-decoration: none;
 
-    background-color: #2524B5;
+    background-color: #99D3FF;
 
     border-radius: 5px;
     border: 0;
     cursor: pointer;
 
-    transition: background 0.3s linear;
+    transition: background 0.7s linear;
 }
 
 .addPostBtn:hover {
-    background-color: #5756b5;
+    background-color: #2524B5;
+    color: #fff;
 }
