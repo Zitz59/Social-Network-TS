@@ -1,18 +1,3 @@
-.app-wrapper {
-    font-size: 15px;
-    margin: 0 auto;
-    width: 1200px;
-    display: grid;
-
-
-    grid-template-areas:
-          "header header"
-          "n content";
-
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-}
-
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -22,6 +7,29 @@ h2,
 h3, h4, h5, h6 {
     margin: 0;
 }
+
+.app-wrapper {
+    font-size: 15px;
+    margin: 0 auto;
+    width: 1200px;
+    display: grid;
+
+
+    grid-template-areas:
+          "header header"
+          "navbar content";
+
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+}
+
+.app-wrapper-content{
+    grid-area: content;
+    background-color: #FF8978;
+
+    padding: 10px;
+}
+
 
 
 
