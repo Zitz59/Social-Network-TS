@@ -10,17 +10,15 @@ import Dialogs from "./components/Dialogs/Dialogs";
 
 const App = () => {
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Profile/>
                 </div>
-                {/*<Profile/>*/}
+                {/*<Dialogs/>*/}
                 {/*<MyPosts/>*/}
             </div>
-        </BrowserRouter>
     );
 }
 export default App;
