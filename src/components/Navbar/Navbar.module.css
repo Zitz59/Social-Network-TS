@@ -1,12 +1,17 @@
 .nav{
     grid-area: navbar;
     background-color: #2524B5;
+    text-decoration: none;
+    color: #fff;
 }
 
-.navItem{
+
+.navItem  {
     padding: 5px;
-    margin: 10px 0 0 20px;
+    margin: 20px 0 0 20px;
+}
 
-    color: #fff;
-
+.active{
+    color: #b4b524;
+    text-decoration: none;
 }
