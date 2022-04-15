@@ -1,22 +1,15 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import {PostsType} from '../../redux/state';
 
-
-type PostDataType = {
-    id: number
-    message: string
-    likesCount: number
+type MyPostsPropsType = {
+    posts:Array<PostsType>
 }
 
-let posts = [
-    {id: 1, message: 'Hi, how are you?', likesCount: 15},
-    {id: 2, message: 'It\'s my first post', likesCount: 20},
-]
-
-let postElements = posts.map((post) => <Post message={post.message} likesCount={post.likesCount}/>)
-
-const MyPosts = () => {
+const MyPosts = (props:MyPostsPropsType) => {
+    let postElements = props.posts.map((post) =>
+        <Post message={post.message} likesCount={post.likesCount} id={post.id}/>)
     return (
         <div className={styles.content}>
             <img className={styles.avatar}
