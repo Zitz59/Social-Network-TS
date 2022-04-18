@@ -3,13 +3,23 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import {PostsType} from '../../redux/state';
 
+
 type MyPostsPropsType = {
-    posts:Array<PostsType>
+    posts: Array<PostsType>
 }
 
-const MyPosts = (props:MyPostsPropsType) => {
+const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map((post) =>
         <Post message={post.message} likesCount={post.likesCount} id={post.id}/>)
+
+
+    let newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef();
+
+    let addPost = () => {
+        let text = newPostElement.current?.value
+        alert(text)
+    }
+
     return (
         <div className={styles.content}>
             <img className={styles.avatar}
@@ -20,10 +30,10 @@ const MyPosts = (props:MyPostsPropsType) => {
                 <h3>My posts</h3>
                 <div>
                     <div>
-                        <textarea className={styles.addPostArea} name="newPost" id="#"
+                        <textarea ref={newPostElement} className={styles.addPostArea} name="newPost" id="#"
                                   placeholder={'write something'}></textarea>
                     </div>
-                    <button className={styles.addPostBtn}>Add post</button>
+                    <button onClick={() => addPost()} className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
             {postElements}
