@@ -21,7 +21,6 @@ const App = (props: PropsType) => {
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
-            <Sidebar sidebar={props.state.sideBar} />
 
             <div className="app-wrapper-content">
                 <Routes>
@@ -33,6 +32,7 @@ const App = (props: PropsType) => {
                     <Route path="/settings" element={<Settings/>}/>
                 </Routes>
             </div>
+            <Sidebar sidebar={props.state.sideBar}/>
         </div>
     );
 }
