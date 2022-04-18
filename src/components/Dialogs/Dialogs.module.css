@@ -1,11 +1,11 @@
-.dialogs .dialogItems{
-    display:                grid;
+.dialogs .dialogItems {
+    display: grid;
     grid-template-columns: 2fr 8fr;
     text-decoration: none;
 
 }
 
-.dialogItems{
+.dialogItems {
     padding: 10px;
 }
 
@@ -13,7 +13,45 @@
     color: #f8f8f8;
 }
 
-dialog.active{
+.dialog.active {
     color: gold;
 }
 
+.addMessageArea {
+    margin: 10px 0 10px 0;
+    width: 50%;
+    height: 125px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+
+.addMessageBtn {
+    display: inline-block;
+    padding: 12px 35px;
+
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+
+    background-color: #99D3FF;
+
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+
+    transition: background 0.7s linear;
+}
+
+.addMessageBtn:hover {
+    background-color: #2524B5;
+    color: #fff;
+}
