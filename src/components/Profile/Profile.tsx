@@ -1,10 +1,11 @@
 import React from 'react';
 import MyPosts from '../MyPosts/MyPosts';
 import {PostsType} from '../../redux/state';
-import {PropsType} from '../../App';
+
 
 type ProfilePropsType = {
     posts:Array<PostsType>
+    addPost:(PostMessage:string)=>void
 }
 
 
@@ -17,7 +18,7 @@ const Profile = (props:ProfilePropsType) => {
                     alt=""/>
             </div>
             <div>
-                <MyPosts posts={props.posts}/>
+                <MyPosts posts={props.posts} addPost = {props.addPost}/>
             </div>
         </div>
     )
