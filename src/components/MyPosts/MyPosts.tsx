@@ -6,20 +6,21 @@ import {PostsType} from '../../redux/state';
 
 type MyPostsPropsType = {
     posts: Array<PostsType>
+    addPost:(PostMessage: string)=>void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map((post) =>
         <Post message={post.message} likesCount={post.likesCount} id={post.id}/>)
 
-
     let newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef();
+    //let newPostElement = React.createRef<HTMLTextAreaElement>(); - 2й вариант
 
-    let addPost = () => {
-        let text = newPostElement.current?.value
-        alert(text)
+    const addPost = () => {
+        debugger;
+        let text = newPostElement.current? newPostElement.current.value : ' ';
+        props.addPost(text);
     }
-
     return (
         <div className={styles.content}>
             <img className={styles.avatar}
@@ -33,7 +34,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                         <textarea ref={newPostElement} className={styles.addPostArea} name="newPost" id="#"
                                   placeholder={'write something'}></textarea>
                     </div>
-                    <button onClick={() => addPost()} className={styles.addPostBtn}>Add post</button>
+                    <button onClick={() => addPost()}  className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
             {postElements}
