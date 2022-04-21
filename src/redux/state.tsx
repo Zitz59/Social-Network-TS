@@ -25,6 +25,7 @@ export type DialogsPageType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPostText:string
 }
 
 export type RootStateType = {
@@ -50,13 +51,26 @@ export let addPost = (postMessage:string) => {
     rerenderEntireTree(state);
 }
 
+export let addMessage = (dialogMessage:string) => {
+    debugger;
+    let newMessage : MessageType = {
+        id:5,
+        message:dialogMessage,
+    };
+    state.dialogsPage.messages.push(newMessage);
+    rerenderEntireTree(state);
+}
+
+
+
 
 let state:RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 15},
             {id: 2, message: 'It\'s my first post', likesCount: 20},
-        ]
+        ],
+        newPostText:'it-kamasutra.com',
     }
     ,
     dialogsPage: {
@@ -78,7 +92,7 @@ let state:RootStateType = {
             {id: 6, message: 'How are you?'},
             {id: 7, message: 'Yo!'},
         ]
-    },
+    } ,
 
     sideBar: [
         {
