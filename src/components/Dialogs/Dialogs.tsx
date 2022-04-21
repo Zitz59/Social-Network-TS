@@ -8,6 +8,7 @@ import {DialogsType, MessageType} from '../../redux/state';
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    addMessage:(newMessage:string)=>void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -17,9 +18,12 @@ const Dialogs = (props: DialogsPropsType) => {
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addMessage = () => {
-        let text = newMessageElement.current?.value
-        alert(text)
+        let text = newMessageElement.current ? newMessageElement.current.value : " "
+            props.addMessage(text)
     }
+
+    //if(newMessageElement.current)
+    // props.addPost{newMessage.current.value}
 
     return (
         <div className={styles.dialogs}>
