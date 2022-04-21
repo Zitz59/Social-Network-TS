@@ -7,6 +7,7 @@ import {PostsType} from '../../redux/state';
 type MyPostsPropsType = {
     posts: Array<PostsType>
     addPost:(PostMessage: string)=>void
+    newPostText:string
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -21,6 +22,12 @@ const MyPosts = (props: MyPostsPropsType) => {
         let text = newPostElement.current? newPostElement.current.value : ' ';
         props.addPost(text);
     }
+const onPostChange = () => {
+
+}
+
+
+
     return (
         <div className={styles.content}>
             <img className={styles.avatar}
@@ -31,7 +38,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <h3>My posts</h3>
                 <div>
                     <div>
-                        <textarea ref={newPostElement} className={styles.addPostArea} name="newPost" id="#"
+                        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} className={styles.addPostArea} name="newPost" id="#"
                                   placeholder={'write something'}></textarea>
                     </div>
                     <button onClick={() => addPost()}  className={styles.addPostBtn}>Add post</button>
