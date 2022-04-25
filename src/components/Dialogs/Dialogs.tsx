@@ -8,7 +8,9 @@ import {DialogsType, MessageType} from '../../redux/state';
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
-    addMessage:(newMessage:string)=>void
+    newMessageText: string
+    addMessage: (newMessage: string) => void
+    updateNewMessage: (newMessage: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -18,8 +20,13 @@ const Dialogs = (props: DialogsPropsType) => {
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addMessage = () => {
-        let text = newMessageElement.current ? newMessageElement.current.value : " "
-            props.addMessage(text)
+        let text = newMessageElement.current ? newMessageElement.current.value : ' '
+        props.addMessage(text)
+    }
+
+    let onMessageChange = () => {
+        let text = newMessageElement.current ? newMessageElement.current.value : ' '
+        props.updateNewMessage(text)
     }
 
     //if(newMessageElement.current)
@@ -36,10 +43,12 @@ const Dialogs = (props: DialogsPropsType) => {
                 </div>
             </div>
             <div>
-                <textarea ref={newMessageElement} className={styles.addMessageArea} name="newMessage" id="#"
-                          placeholder={'write to somebody'}>
-
-                </textarea>
+                <textarea onChange={onMessageChange}
+                          value={props.newMessageText}
+                          ref={newMessageElement}
+                          className={styles.addMessageArea}
+                          name="newMessage" id="#"
+                          placeholder={'write to somebody'}/>
             </div>
             <div>
                 <button onClick={() => addMessage()} className={styles.addMessageBtn}>Send</button>
