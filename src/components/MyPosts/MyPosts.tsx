@@ -6,8 +6,9 @@ import {PostsType} from '../../redux/state';
 
 type MyPostsPropsType = {
     posts: Array<PostsType>
-    addPost:(PostMessage: string)=>void
-    newPostText:string
+    addPost: (PostMessage: string) => void
+    newPostText: string
+    changeNewPostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -17,15 +18,14 @@ const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef();
     //let newPostElement = React.createRef<HTMLTextAreaElement>(); - 2й вариант
 
-    const addPost = () => {
-        debugger;
-        let text = newPostElement.current? newPostElement.current.value : ' ';
-        props.addPost(text);
+    let addPost = () => {
+        props.addPost(props.newPostText);
+
     }
-const onPostChange = () => {
-
-}
-
+    let onPostChange = () => {
+        let text = newPostElement.current ? newPostElement.current.value : ' ';
+        props.changeNewPostText(text);
+    }
 
 
     return (
@@ -38,10 +38,11 @@ const onPostChange = () => {
                 <h3>My posts</h3>
                 <div>
                     <div>
-                        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} className={styles.addPostArea} name="newPost" id="#"
-                                  placeholder={'write something'}></textarea>
+                        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}
+                                  className={styles.addPostArea} name="newPost" id="#"
+                                  placeholder={'write something'}/>
                     </div>
-                    <button onClick={() => addPost()}  className={styles.addPostBtn}>Add post</button>
+                    <button onClick={() => addPost()} className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
             {postElements}
