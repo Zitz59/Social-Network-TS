@@ -4,14 +4,14 @@ import {PostsType} from '../../redux/state';
 
 
 type ProfilePropsType = {
-    posts:Array<PostsType>
-    addPost:(PostMessage:string)=>void
-    newPostText:string
+    posts: Array<PostsType>
+    addPost: (PostMessage: string) => void
+    newPostText: string
+    changeNewPostText: (newText: string) => void
 
 }
 
-
-const Profile = (props:ProfilePropsType) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <div>
@@ -20,7 +20,10 @@ const Profile = (props:ProfilePropsType) => {
                     alt=""/>
             </div>
             <div>
-                <MyPosts posts={props.posts} addPost = {props.addPost} newPostText={props.newPostText}/>
+                <MyPosts posts={props.posts}
+                         addPost={props.addPost}
+                         newPostText={props.newPostText}
+                         changeNewPostText={props.changeNewPostText}/>
             </div>
         </div>
     )
