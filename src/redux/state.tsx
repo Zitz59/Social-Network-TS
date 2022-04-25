@@ -20,6 +20,7 @@ export type PostsType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newMessageText:string
 
 }
 
@@ -40,15 +41,20 @@ export type SidebarType = {
     avatar: string
 }
 
-export let addPost = (postMessage:string) => {
-    debugger;
+export let addPost = () => {
     let newPost : PostsType = {
         id:5,
-        message:postMessage,
+        message:state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''// null new post
     rerenderEntireTree(state);
+}
+
+export let changeNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state); // update post FLUX
 }
 
 export let addMessage = (dialogMessage:string) => {
@@ -58,8 +64,16 @@ export let addMessage = (dialogMessage:string) => {
         message:dialogMessage,
     };
     state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessageText = ' ' // null  new message
     rerenderEntireTree(state);
 }
+
+export let updateNewMessage = (newMessage:string) => {
+    state.dialogsPage.newMessageText = newMessage;
+    rerenderEntireTree(state);// update message FLUX
+}
+
+
 
 
 
@@ -91,7 +105,8 @@ let state:RootStateType = {
             {id: 5, message: 'Learn React!'},
             {id: 6, message: 'How are you?'},
             {id: 7, message: 'Yo!'},
-        ]
+        ],
+        newMessageText: 'Hello World',
     } ,
 
     sideBar: [
@@ -109,5 +124,6 @@ let state:RootStateType = {
     ]
 
 }
+
 
 export default state;
