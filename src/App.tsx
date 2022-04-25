@@ -13,8 +13,10 @@ import {RootStateType} from './redux/state';
 
 export type PropsType = {
     state: RootStateType;
-    addPost:(postMessage:string)=>void;
-    addMessage:(dialogMessage:string)=>void
+    addPost: (postMessage: string) => void;
+    addMessage: (dialogMessage: string) => void
+    changeNewPostText: (newText: string) => void
+    updateNewMessage: (newMessage: string) => void
 
 }
 
@@ -23,20 +25,24 @@ const App = (props: PropsType) => {
 
         <div className="app-wrapper">
             <Header/>
-            <Navbar/>
+            <Navbar sideBar={props.state.sideBar}/>
 
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/profile" element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost} newPostText = {props.state.profilePage.newPostText}/>}/>
+                    <Route path="/profile" element={<Profile posts={props.state.profilePage.posts}
+                                                             addPost={props.addPost}
+                                                             newPostText={props.state.profilePage.newPostText}
+                                                             changeNewPostText={props.changeNewPostText}/>}/>
                     <Route path="/dialogs/*" element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                messages={props.state.dialogsPage.messages}
-                                                                addMessage={props.addMessage}/>}/>
+                                                               newMessageText={props.state.dialogsPage.newMessageText}
+                                                               addMessage={props.addMessage}
+                                                               updateNewMessage={props.updateNewMessage}/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
                 </Routes>
             </div>
-            <Sidebar sidebar={props.state.sideBar}/>
         </div>
     );
 }
