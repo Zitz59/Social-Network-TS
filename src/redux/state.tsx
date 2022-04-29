@@ -1,10 +1,12 @@
 
-let rerenderEntireTree = () => {
+let onChange = () => {
     console.log('State changed')
 }
 
+
+
 export const subscribe = (observer: ()=> void) => {
-    rerenderEntireTree = observer
+    onChange = observer
 
 }
 
@@ -56,12 +58,12 @@ export let addPost = () => {
     };
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = ''// null new post
-    rerenderEntireTree();
+    onChange();
 }
 
 export let changeNewPostText = (newText:string) => {
     state.profilePage.newPostText = newText;
-    rerenderEntireTree(); // update post FLUX
+    onChange(); // update post FLUX
 }
 
 export let addMessage = (dialogMessage:string) => {
@@ -72,12 +74,12 @@ export let addMessage = (dialogMessage:string) => {
     };
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = ' ' // null  new message
-    rerenderEntireTree();
+    onChange();
 }
 
 export let updateNewMessage = (newMessage:string) => {
     state.dialogsPage.newMessageText = newMessage;
-    rerenderEntireTree();// update message FLUX
+    onChange();// update message FLUX
 }
 
 
