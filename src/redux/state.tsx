@@ -1,5 +1,12 @@
-import {rerenderEntireTree} from '../render';
 
+let rerenderEntireTree = () => {
+    console.log('State changed')
+}
+
+export const subscribe = (observer: ()=> void) => {
+    rerenderEntireTree = observer
+
+}
 
 export type MessageType = {
     id: number
@@ -49,30 +56,29 @@ export let addPost = () => {
     };
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = ''// null new post
-    rerenderEntireTree(state);
+    rerenderEntireTree();
 }
 
 export let changeNewPostText = (newText:string) => {
     state.profilePage.newPostText = newText;
-    rerenderEntireTree(state); // update post FLUX
+    rerenderEntireTree(); // update post FLUX
 }
 
 export let addMessage = (dialogMessage:string) => {
-    debugger;
+
     let newMessage : MessageType = {
         id:5,
         message:dialogMessage,
     };
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = ' ' // null  new message
-    rerenderEntireTree(state);
+    rerenderEntireTree();
 }
 
 export let updateNewMessage = (newMessage:string) => {
     state.dialogsPage.newMessageText = newMessage;
-    rerenderEntireTree(state);// update message FLUX
+    rerenderEntireTree();// update message FLUX
 }
-
 
 
 
@@ -124,6 +130,7 @@ let state:RootStateType = {
     ]
 
 }
+
 
 
 export default state;
