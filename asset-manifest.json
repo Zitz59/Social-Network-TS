@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Social-Network-TS/static/css/main.58ba32d2.css",
+    "main.js": "/Social-Network-TS/static/js/main.9e6a2bc7.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Social-Network-TS/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/Social-Network-TS/index.html",
+    "main.58ba32d2.css.map": "/Social-Network-TS/static/css/main.58ba32d2.css.map",
+    "main.9e6a2bc7.js.map": "/Social-Network-TS/static/js/main.9e6a2bc7.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Social-Network-TS/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58ba32d2.css",
+    "static/js/main.9e6a2bc7.js"
+  ]
+}
