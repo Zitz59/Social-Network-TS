@@ -1,13 +1,6 @@
 
-let onChange = () => {
+let rerenderEntireTree = (state:RootStateType) => {
     console.log('State changed')
-}
-
-
-
-export const subscribe = (observer: ()=> void) => {
-    onChange = observer
-
 }
 
 export type MessageType = {
@@ -58,12 +51,12 @@ export let addPost = () => {
     };
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = ''// null new post
-    onChange();
+    rerenderEntireTree(state);
 }
 
 export let changeNewPostText = (newText:string) => {
     state.profilePage.newPostText = newText;
-    onChange(); // update post FLUX
+    rerenderEntireTree(state); // update post FLUX
 }
 
 export let addMessage = (dialogMessage:string) => {
@@ -74,17 +67,16 @@ export let addMessage = (dialogMessage:string) => {
     };
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = ' ' // null  new message
-    onChange();
+    rerenderEntireTree(state);
 }
 
 export let updateNewMessage = (newMessage:string) => {
     state.dialogsPage.newMessageText = newMessage;
-    onChange();// update message FLUX
+    rerenderEntireTree(state);// update message FLUX
 }
-
-
-
-
+export const subscribe = (observer:(state:RootStateType)=>void) => {
+  rerenderEntireTree=observer
+}
 
 let state:RootStateType = {
     profilePage: {
@@ -132,7 +124,5 @@ let state:RootStateType = {
     ]
 
 }
-
-
 
 export default state;
