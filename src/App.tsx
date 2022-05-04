@@ -8,7 +8,6 @@ import {Route, Routes} from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
-import Sidebar from './components/Sidebar/Sidebar';
 import {RootStateType} from './redux/state';
 
 export type PropsType = {
