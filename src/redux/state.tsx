@@ -1,84 +1,5 @@
-
-let rerenderEntireTree = (state:RootStateType) => {
-    console.log('State changed')
-}
-
-export type MessageType = {
-    id: number
-    message: string
-}
-
-export type DialogsType = {
-    id: number
-    name: string
-}
-
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type DialogsPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    newMessageText:string
-
-}
-
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText:string
-}
-
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sideBar: SidebarType[]
-}
-
-export type SidebarType = {
-    id: number
-    name: string
-    avatar: string
-}
-
-export let addPost = () => {
-    let newPost : PostsType = {
-        id:5,
-        message:state.profilePage.newPostText,
-        likesCount: 0
-    };
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = ''// null new post
-    rerenderEntireTree(state);
-}
-
-export let changeNewPostText = (newText:string) => {
-    state.profilePage.newPostText = newText;
-    rerenderEntireTree(state); // update post FLUX
-}
-
-export let addMessage = (dialogMessage:string) => {
-
-    let newMessage : MessageType = {
-        id:5,
-        message:dialogMessage,
-    };
-    state.dialogsPage.messages.push(newMessage);
-    state.dialogsPage.newMessageText = ' ' // null  new message
-    rerenderEntireTree(state);
-}
-
-export let updateNewMessage = (newMessage:string) => {
-    state.dialogsPage.newMessageText = newMessage;
-    rerenderEntireTree(state);// update message FLUX
-}
-export const subscribe = (observer:(state:RootStateType)=>void) => {
-  rerenderEntireTree=observer
-}
-
-let state:RootStateType = {
+let store = {
+    _state: {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 15},
@@ -123,6 +44,84 @@ let state:RootStateType = {
         }
     ]
 
+},
+    getState(){
+        return this._state;
+    },
+    _callSubscriber  (_state:RootStateType)  {
+        console.log('State changed')
+    },
+     addPost  ()  {
+        let newPost : PostsType = {
+            id:5,
+            message:this._state.profilePage.newPostText,
+            likesCount: 0
+        };
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newPostText = ''// null new post
+        this._callSubscriber(this._state);
+    },
+     changeNewPostText  (newText:string)  {
+        this._state.profilePage.newPostText = newText;
+        this._callSubscriber(this._state); // update post FLUX
+    },
+     addMessage  (dialogMessage:string)  {
+
+        let newMessage : MessageType = {
+            id:5,
+            message:dialogMessage,
+        };
+        this._state.dialogsPage.messages.push(newMessage);
+        this._state.dialogsPage.newMessageText = ' ' // null  new message
+        this._callSubscriber(this._state);
+    },
+    updateNewMessage  (newMessage:string)  {
+        this._state.dialogsPage.newMessageText = newMessage;
+        this._callSubscriber(this._state);// update message FLUX
+    },
+    subscribe  (observer:(state:RootStateType)=>void)  {
+        this._callSubscriber=observer
+    },
 }
 
-export default state;
+export type MessageType = {
+    id: number
+    message: string
+}
+
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageText:string
+
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText:string
+}
+
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sideBar: SidebarType[]
+}
+
+export type SidebarType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+export default store;
