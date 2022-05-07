@@ -19,6 +19,7 @@ let rerenderEntireTree = (_state:RootStateType)=> {
                      addMessage={store.addMessage.bind(store)}
                      changeNewPostText={store.changeNewPostText.bind(store)}
                      updateNewMessage ={store.updateNewMessage.bind(store)}
+                     dispatch={store.dispatch.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>
