@@ -8,7 +8,7 @@ import {Route, Routes} from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
-import {RootStateType} from './redux/state';
+import {AddPostActionType, ChangeNewPostTextActionType, RootStateType} from './redux/state';
 
 export type PropsType = {
     state: RootStateType;
@@ -16,6 +16,7 @@ export type PropsType = {
     addMessage: (dialogMessage: string) => void
     changeNewPostText: (newText: string) => void
     updateNewMessage: (newMessage: string) => void
+    dispatch:(action:AddPostActionType|ChangeNewPostTextActionType)=>void
 
 }
 
@@ -30,6 +31,7 @@ const App = (props: PropsType) => {
                 <Routes>
                     <Route path="/profile" element={<Profile posts={props.state.profilePage.posts}
                                                              addPost={props.addPost}
+                                                             dispatch={props.dispatch}
                                                              newPostText={props.state.profilePage.newPostText}
                                                              changeNewPostText={props.changeNewPostText}/>}/>
                     <Route path="/dialogs/*" element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
