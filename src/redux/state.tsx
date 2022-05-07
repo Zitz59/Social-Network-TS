@@ -149,7 +149,7 @@ export type  StoreType = {
     changeNewPostText:(newText:string)=>void
     addMessage:(dialogMessage:string)=>void
     updateNewMessage:(newMessage:string)=>void
-    subscribe:(callback:()=>void)=>void
+    subscribe: (callback: (_state: RootStateType) => void)=>void
     getState:()=>RootStateType
     _callSubscriber:()=>void
     dispatch:(action:AddPostActionType|ChangeNewPostTextActionType)=>void
