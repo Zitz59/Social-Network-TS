@@ -1,4 +1,4 @@
-let store = {
+const store:StoreType = {
     _state: {
     profilePage: {
         posts: [
@@ -48,22 +48,22 @@ let store = {
     getState(){
         return this._state;
     },
-    _callSubscriber  (_state:RootStateType)  {
+    _callSubscriber  ()  {
         console.log('State changed')
     },
-     addPost  ()  {
-        let newPost : PostsType = {
-            id:5,
-            message:this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ''// null new post
-        this._callSubscriber(this._state);
+     addPost  (newPost)  {
+        // let newPost : PostsType = {
+        //     id:5,
+        //     message:this._state.profilePage.newPostText,
+        //     likesCount: 0
+        // };
+        // this._state.profilePage.posts.push(newPost);
+        // this._state.profilePage.newPostText = ''// null new post
+        // this._callSubscriber(this._state);
     },
      changeNewPostText  (newText:string)  {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state); // update post FLUX
+        // this._state.profilePage.newPostText = newText;
+        // this._callSubscriber(this._state); // update post FLUX
     },
      addMessage  (dialogMessage:string)  {
 
@@ -73,15 +73,34 @@ let store = {
         };
         this._state.dialogsPage.messages.push(newMessage);
         this._state.dialogsPage.newMessageText = ' ' // null  new message
-        this._callSubscriber(this._state);
+        this._callSubscriber();
     },
     updateNewMessage  (newMessage:string)  {
         this._state.dialogsPage.newMessageText = newMessage;
-        this._callSubscriber(this._state);// update message FLUX
+        this._callSubscriber();// update message FLUX
     },
-    subscribe  (observer:(state:RootStateType)=>void)  {
-        this._callSubscriber=observer
+    subscribe  (callback)  {
+        this._callSubscriber=callback
     },
+
+    dispatch (action) {
+        if(action.type==='ADD-POST'){
+
+            let newPost : PostsType = {
+                id:5,
+                message:action.postMessage,//this._state.profilePage.newPostText
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ''// null new post
+            this._callSubscriber();
+        }else if(action.type==='UPDATE-NEW-POST-TEXT'){
+
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber();
+        }
+
+    }
 }
 
 export type MessageType = {
@@ -122,6 +141,36 @@ export type SidebarType = {
     id: number
     name: string
     avatar: string
+}
+
+export type  StoreType = {
+ _state:RootStateType
+    addPost:(postMessage: string) => void
+    changeNewPostText:(newText:string)=>void
+    addMessage:(dialogMessage:string)=>void
+    updateNewMessage:(newMessage:string)=>void
+    subscribe:(callback:()=>void)=>void
+    getState:()=>RootStateType
+    _callSubscriber:()=>void
+    dispatch:(action:AddPostActionType|ChangeNewPostTextActionType)=>void
+}
+
+export type AddPostActionType = {
+    type:'ADD-POST'
+    postMessage:string
+}
+
+export type ChangeNewPostTextActionType = {
+    type:'UPDATE-NEW-POST-TEXT'
+    newText:string
+}
+
+export type AddMessageActionType = {
+
+}
+
+export type  UpdateNewMessageActionType = {
+
 }
 
 export default store;
