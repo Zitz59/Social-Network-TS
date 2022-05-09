@@ -2,31 +2,34 @@ import React from 'react';
 import styles from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsType, MessageType} from '../../redux/state';
+import {ActionTypes, DialogsType, MessageType} from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newMessageText: string
-    addMessage: (newMessage: string) => void
-    updateNewMessage: (newMessage: string) => void
+    // addMessage: (newMessage: string) => void
+    // updateNewMessage: (newMessage: string) => void
+    dispatch:(action:ActionTypes)=>void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-    let dialogsElements = props.dialogs.map((dialog) => <DialogItem name={dialog.name} id={dialog.id}/>);
-    let messagesElements = props.messages.map((message) => <Message message={message.message}/>)
+    let dialogsElements = props.dialogs.map((dialog) => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>);
+    let messagesElements = props.messages.map((message) => <Message message={message.message} key={message.id}/>)
 
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addMessage = () => {
         let text = newMessageElement.current ? newMessageElement.current.value : ' '
-        props.addMessage(text)
+        // props.addMessage(text)
+        props.dispatch({type:'ADD-MESSAGE',dialogMessage:text})
     }
 
     let onMessageChange = () => {
         let text = newMessageElement.current ? newMessageElement.current.value : ' '
-        props.updateNewMessage(text)
+        // props.updateNewMessage(text)
+        props.dispatch({type:'UPDATE-NEW-MESSAGE',newMessage:text})
     }
 
     //if(newMessageElement.current)

@@ -8,14 +8,16 @@ import {Route, Routes} from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
-import {RootStateType} from './redux/state';
+import {ActionTypes, RootStateType, StoreType} from './redux/state';
 
 export type PropsType = {
+    store:StoreType
     state: RootStateType;
-    addPost: (postMessage: string) => void;
-    addMessage: (dialogMessage: string) => void
-    changeNewPostText: (newText: string) => void
-    updateNewMessage: (newMessage: string) => void
+    // addPost: (postMessage: string) => void;
+    // addMessage: (dialogMessage: string) => void
+    // changeNewPostText: (newText: string) => void
+    // updateNewMessage: (newMessage: string) => void
+    dispatch:(action:ActionTypes)=>void
 
 }
 
@@ -29,14 +31,16 @@ const App = (props: PropsType) => {
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path="/profile" element={<Profile posts={props.state.profilePage.posts}
-                                                             addPost={props.addPost}
+                                                             // addPost={props.addPost}
+                                                             dispatch={props.dispatch}
                                                              newPostText={props.state.profilePage.newPostText}
-                                                             changeNewPostText={props.changeNewPostText}/>}/>
+                                                             /*changeNewPostText={props.changeNewPostText}*/ />}/>
                     <Route path="/dialogs/*" element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                messages={props.state.dialogsPage.messages}
                                                                newMessageText={props.state.dialogsPage.newMessageText}
-                                                               addMessage={props.addMessage}
-                                                               updateNewMessage={props.updateNewMessage}/>}/>
+                                                               // addMessage={props.addMessage}
+                                                               dispatch={props.dispatch}
+                                                               /*updateNewMessage={props.updateNewMessage}*/ />}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
