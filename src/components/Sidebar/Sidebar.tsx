@@ -11,12 +11,12 @@ type SidebarPropsType = {
 
 function Sidebar(props: SidebarPropsType) {
     let sideBarElements = props.sidebar.map((sideBar) =>
-        <SideBarItem name={sideBar.name} avatar={sideBar.avatar}/>)
+        <SideBarItem name={sideBar.name} avatar={sideBar.avatar} key={sideBar.id}/>)
     return (
         <div>
             {sideBarElements}
         </div>
     );
-};
+}
 
 export default Sidebar;
