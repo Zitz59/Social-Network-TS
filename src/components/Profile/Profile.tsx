@@ -1,14 +1,14 @@
 import React from 'react';
 import MyPosts from '../MyPosts/MyPosts';
-import {AddPostActionType, ChangeNewPostTextActionType, PostsType} from '../../redux/state';
+import {ActionTypes, PostsType} from '../../redux/state';
 
 
 type ProfilePropsType = {
     posts: Array<PostsType>
-    addPost: (PostMessage: string) => void
+    // addPost: (PostMessage: string) => void
     newPostText: string
-    changeNewPostText: (newText: string) => void
-    dispatch:(action:AddPostActionType|ChangeNewPostTextActionType)=>void
+    // changeNewPostText: (newText: string) => void
+    dispatch:(action:ActionTypes)=>void
 
 }
 
@@ -22,9 +22,9 @@ const Profile = (props: ProfilePropsType) => {
             </div>
             <div>
                 <MyPosts posts={props.posts}
-                         addPost={props.addPost}
+                         // addPost={props.addPost}
                          newPostText={props.newPostText}
-                         changeNewPostText={props.changeNewPostText}
+                         //changeNewPostText={props.changeNewPostText}
                          dispatch={props.dispatch}/>
             </div>
         </div>
