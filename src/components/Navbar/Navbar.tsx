@@ -12,17 +12,17 @@ const Navbar = (props:NavbarType) => {
     return (
         <nav className={styles.nav}>
             <div className={styles.navItem}>
-                <NavLink to="/profile" className={navData => navData.isActive ? styles.active:styles.nav}>
+                <NavLink to={"/profile"} className={navData => navData.isActive ? styles.active:styles.nav}>
                     <a >Profile</a>
                 </NavLink>
             </div>
             <div className={styles.navItem}>
-                <NavLink to="/dialogs" className={navData => navData.isActive ? styles.active:styles.nav}>
+                <NavLink to={"/dialogs"} /*style={(params)=>{return{color: params.isActive ?'#99D3FF': 'white'}}}*/ className={navData => navData.isActive ? styles.active:styles.nav}>
                     <a >Messages</a>
                 </NavLink>
             </div>
             <div className={styles.navItem}>
-                <NavLink to="/news" className={navData => navData.isActive ? styles.active:styles.nav}>
+                <NavLink to={"/news"} className={navData => navData.isActive ? styles.active:styles.nav}>
                     <a >News</a>
                 </NavLink>
             </div>
