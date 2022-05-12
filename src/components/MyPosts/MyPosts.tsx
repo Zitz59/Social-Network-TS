@@ -1,15 +1,14 @@
 import React, {ChangeEvent} from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionTypes, addPostAC, onPostChangeAC, PostsType} from '../../redux/state';
+import {ActionTypes, PostsType} from '../../redux/state';
+import {addPostAC, onPostChangeAC} from '../../redux/profileReducer';
 
 
 type MyPostsPropsType = {
     posts: Array<PostsType>
-    // addPost: (PostMessage: string) => void
     newPostText: string
-    // changeNewPostText: (newText: string) => void
-    dispatch:(action:ActionTypes)=>void
+    dispatch: (action: ActionTypes) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -20,17 +19,12 @@ const MyPosts = (props: MyPostsPropsType) => {
     //let newPostElement = React.createRef<HTMLTextAreaElement>(); - 2й вариант
 
     let addPost = () => {
-        // props.addPost(props.newPostText);
         props.dispatch(addPostAC(props.newPostText))
 
     }
-    let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        // let text = newPostElement.current ? newPostElement.current.value : ' ';
-        // props.changeNewPostText(e.currentTarget.value)
-        // props.changeNewPostText(text);
-        props.dispatch(onPostChangeAC(e.currentTarget.value))}
-
-
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(onPostChangeAC(e.currentTarget.value))
+    }
 
 
     return (
