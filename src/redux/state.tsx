@@ -50,31 +50,6 @@ export type  StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-
-export type ChangeNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-
-export type AddMessageActionType = {
-    type:'ADD-MESSAGE'
-    dialogMessage:string
-}
-
-export type  UpdateNewMessageActionType = {
-    type:'UPDATE-NEW-MESSAGE'
-    newMessage:string
-}
-
-export type ActionTypes = AddPostActionType | ChangeNewPostTextActionType |AddMessageActionType | UpdateNewMessageActionType
-
-
-
-
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -173,5 +148,32 @@ const store: StoreType = {
 
     }
 }
+export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof onMessageChangeAC>
+
+
+export const addPostAC = (newPostText:string) => {
+    return {
+        type:'ADD-POST', postMessage:newPostText
+    } as const
+}
+
+export const onPostChangeAC = (newText:string) => {
+    return{
+        type:'UPDATE-NEW-POST-TEXT',newText:newText
+    } as const
+}
+
+export const addMessageAC = (dialogMessage:string) => {
+    return {
+        type:'ADD-MESSAGE',dialogMessage:dialogMessage
+    } as const
+}
+
+export const onMessageChangeAC = (newMessage:string) => {
+    return{
+        type:'UPDATE-NEW-MESSAGE',newMessage:newMessage
+    } as const
+}
+
 
 export default store;
