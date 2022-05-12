@@ -5,7 +5,7 @@ import SideBarItem from './SidebarItem/SideBarItem';
 
 
 type SidebarPropsType = {
-    sidebar:SidebarType[]
+    sidebar: SidebarType[]
 
 }
 

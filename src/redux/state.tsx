@@ -1,3 +1,6 @@
+import profileReducer, {addPostAC, onPostChangeAC} from './profileReducer';
+import dialogsReducer, {addMessageAC, onMessageChangeAC} from './dialogsReducer';
+
 export type MessageType = {
     id: number
     message: string
@@ -41,10 +44,6 @@ export type SidebarType = {
 export type  StoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    // addPost: (newPost: string) => void
-    // changeNewPostText: (newText: string) => void
-    // addMessage: (dialogMessage: string) => void
-    // updateNewMessage: (newMessage: string) => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     dispatch: (action: ActionTypes) => void
@@ -57,7 +56,7 @@ const store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
                 {id: 2, message: 'It\'s my first post', likesCount: 20},
             ],
-            newPostText: 'it-kamasutra.com',
+            newPostText: '',
         }
         ,
         dialogsPage: {
@@ -79,7 +78,7 @@ const store: StoreType = {
                 {id: 6, message: 'How are you?'},
                 {id: 7, message: 'Yo!'},
             ],
-            newMessageText: 'Hello World',
+            newMessageText: '',
         },
 
         sideBar: [
@@ -95,7 +94,7 @@ const store: StoreType = {
             },
             {
                 id: 3,
-                name: 'Jane',
+                name: 'Klava',
                 avatar: 'https://media.istockphoto.com/vectors/cartoon-young-girl-face-vector-illustration-of-beautiful-woman-avatar-vector-id923639308?b=1&k=20&m=923639308&s=170667a&w=0&h=dNz54KGP6e7MSDib2X6eGkbw4g-JLSdQaBp3pleK88M='
             }
         ]
@@ -108,72 +107,24 @@ const store: StoreType = {
         console.log('State changed')
     },
 
-    // addMessage(dialogMessage: string) {
-    //
-    //
-    // },
-    // updateNewMessage(newMessage: string) {
-    //     this._state.dialogsPage.newMessageText = newMessage;
-    //     this._onChange();// update message FLUX
-    // },
     subscribe(callback) {
         this._onChange = callback
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostsType = {
-                id: 5,
-                message: action.postMessage,//this._state.profilePage.newPostText
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''// null new post
-            this._onChange();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._onChange();
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MessageType = {
-                id: 5,
-                message: action.dialogMessage,
-            };
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = ' ' // null  new message
-            this._onChange();
-        }else if(action.type === 'UPDATE-NEW-MESSAGE'){
-            this._state.dialogsPage.newMessageText = action.newMessage;
-            this._onChange();// update message FLUX
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.sideBar=sidebarReducer(this._state.sideBar, action)
+        this._onChange();
 
     }
 }
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof onMessageChangeAC>
 
-
-export const addPostAC = (newPostText:string) => {
-    return {
-        type:'ADD-POST', postMessage:newPostText
-    } as const
-}
-
-export const onPostChangeAC = (newText:string) => {
-    return{
-        type:'UPDATE-NEW-POST-TEXT',newText:newText
-    } as const
-}
-
-export const addMessageAC = (dialogMessage:string) => {
-    return {
-        type:'ADD-MESSAGE',dialogMessage:dialogMessage
-    } as const
-}
-
-export const onMessageChangeAC = (newMessage:string) => {
-    return{
-        type:'UPDATE-NEW-MESSAGE',newMessage:newMessage
-    } as const
-}
+export type ActionTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof onPostChangeAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof onMessageChangeAC>
 
 
 export default store;

@@ -11,13 +11,9 @@ import Music from './components/Music/Music';
 import {ActionTypes, RootStateType, StoreType} from './redux/state';
 
 export type PropsType = {
-    store:StoreType
+    store: StoreType
     state: RootStateType;
-    // addPost: (postMessage: string) => void;
-    // addMessage: (dialogMessage: string) => void
-    // changeNewPostText: (newText: string) => void
-    // updateNewMessage: (newMessage: string) => void
-    dispatch:(action:ActionTypes)=>void
+    dispatch: (action: ActionTypes) => void
 
 }
 
@@ -31,16 +27,12 @@ const App = (props: PropsType) => {
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path="/profile" element={<Profile posts={props.state.profilePage.posts}
-                                                             // addPost={props.addPost}
                                                              dispatch={props.dispatch}
-                                                             newPostText={props.state.profilePage.newPostText}
-                                                             /*changeNewPostText={props.changeNewPostText}*/ />}/>
+                                                             newPostText={props.state.profilePage.newPostText}/>}/>
                     <Route path="/dialogs/*" element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                messages={props.state.dialogsPage.messages}
                                                                newMessageText={props.state.dialogsPage.newMessageText}
-                                                               // addMessage={props.addMessage}
-                                                               dispatch={props.dispatch}
-                                                               /*updateNewMessage={props.updateNewMessage}*/ />}/>
+                                                               dispatch={props.dispatch}/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
