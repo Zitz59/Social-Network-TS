@@ -1,5 +1,5 @@
-import {DialogsPageType, MessageType,} from './state';
-import {ActionTypes} from './state';
+import {DialogsPageType, MessageType,} from './store';
+import {ActionTypes} from './store';
 
 type dialogsReducerType = AddMessageACType | UpdateNewMessageACType
 
@@ -7,7 +7,34 @@ type AddMessageACType = ActionTypes
 
 type UpdateNewMessageACType = ActionTypes
 
-const dialogsReducer = (state: DialogsPageType, action: dialogsReducerType) => {
+type initialStateType = DialogsPageType
+
+
+let initialState:initialStateType = {
+
+    dialogs: [
+        {id: 1, name: 'Alexey'},
+        {id: 2, name: 'Anton'},
+        {id: 3, name: 'Ann'},
+        {id: 4, name: 'Ksu'},
+        {id: 5, name: 'Max'},
+        {id: 6, name: 'Stanz Wizard'},
+        {id: 7, name: 'Dima'}
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'Where is my money?'},
+        {id: 3, message: 'Hey!'},
+        {id: 4, message: 'Abrvalg'},
+        {id: 5, message: 'Learn React!'},
+        {id: 6, message: 'How are you?'},
+        {id: 7, message: 'Yo!'},
+    ],
+    newMessageText: ''
+}
+
+
+const dialogsReducer = (state=initialState, action: dialogsReducerType) => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MessageType = {
