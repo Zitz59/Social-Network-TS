@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SidebarType} from '../../redux/state';
+import {SidebarType} from '../../redux/store';
 import SideBarItem from './SidebarItem/SideBarItem';
 
 
