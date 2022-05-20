@@ -1,14 +1,15 @@
 import React, {ChangeEvent} from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionTypes, PostsType} from '../../redux/state';
-import {addPostAC, onPostChangeAC} from '../../redux/profileReducer';
+import {ActionTypes, PostsType} from '../../redux/store';
 
 
-type MyPostsPropsType = {
+export type MyPostsPropsType = {
     posts: Array<PostsType>
     newPostText: string
-    dispatch: (action: ActionTypes) => void
+    // dispatch: (action: ActionTypes) => void
+    changeNewPostText: (newText: string) => void
+    addPost: (newPostText: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -19,11 +20,15 @@ const MyPosts = (props: MyPostsPropsType) => {
     //let newPostElement = React.createRef<HTMLTextAreaElement>(); - 2й вариант
 
     let addPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
+        props.addPost(props.newPostText)
+        // props.dispatch(addPostAC(props.newPostText))
 
     }
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(onPostChangeAC(e.currentTarget.value))
+        let text = newPostElement.current ? newPostElement.current.value : ' ';
+        props.changeNewPostText(e.currentTarget.value)
+        props.changeNewPostText(text);
+        // props.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
 
@@ -41,7 +46,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                                   className={styles.addPostArea} name="newPost" id="#"
                                   placeholder={'write something'}/>
                     </div>
-                    <button onClick={() => addPost()} className={styles.addPostBtn}>Add post</button>
+                    <button onClick={addPost} className={styles.addPostBtn}>Add post</button>
                 </div>
             </div>
             {postElements}
