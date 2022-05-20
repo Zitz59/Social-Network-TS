@@ -5,37 +5,34 @@ import Message from './Message/Message';
 import {ActionTypes, DialogsType, MessageType, StoreType} from '../../redux/store';
 import {addMessageAC, onMessageChangeAC} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
+import {ReduxStoreType} from '../../redux/redux-store';
+
 
 
 type DialogsContainerPropsType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    newMessageText: string
-    dispatch: (action: ActionTypes) => void
-    store:StoreType
+    // dialogs: Array<DialogsType>
+    // messages: Array<MessageType>
+    // newMessageText: string
+    // dispatch: (action: ActionTypes) => void
+    store:ReduxStoreType
 }
 
 const DialogsContainer = (props: DialogsContainerPropsType) => {
-    let dialogsElements = props.dialogs.map((dialog) => <DialogItem name={dialog.name} id={dialog.id}
-                                                                    key={dialog.id}/>);
-    let messagesElements = props.messages.map((message) => <Message message={message.message} key={message.id}/>)
-
-    let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+    let state = props.store.getState();
 
     let addMessage = () => {
-        debugger
-        props.store.dispatch(addMessageAC(props.newMessageText))
+        props.store.dispatch(addMessageAC(state.dialogsPage.newMessageText))
     }
 
-    let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
-        props.store.dispatch(onMessageChangeAC(e.currentTarget.value))
+    let onMessageChange = (newMessage:string) => {
+        props.store.dispatch(onMessageChangeAC(newMessage))
     }
 
-
-    let newMessage = props.newMessageText
-
-    return (<Dialogs addMessage = {addMessage} onMessageChange = {onMessageChange} dialogs={} messages={} newMessageText={} dispatch={})
+    return (<Dialogs addMessage = {addMessage}
+                     onMessageChange = {onMessageChange}
+                     dialogs={state.dialogsPage.dialogs}
+                     messages={state.dialogsPage.messages}
+                     newMessageText={state.dialogsPage.newMessageText} />)
 }
 
 export default DialogsContainer;
