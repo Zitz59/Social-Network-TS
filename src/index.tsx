@@ -1,20 +1,23 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/redux-store';
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import './index.css';
+import {Provider} from './StoreContext';
 
 let rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
+                <Provider store={store}>
                 <App state={store.getState()}
                      store={store}
                      dispatch={store.dispatch.bind(store)}
                 />
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>
         ,
@@ -27,6 +30,5 @@ let rerenderEntireTree = () => {
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-//state with data to rerender
-rerenderEntireTree()
-store.subscribe(rerenderEntireTree)//callback to rerender when state will change
+rerenderEntireTree()//state with data to rerender
+store.subscribe(rerenderEntireTree)// store.subscribe(rerenderEntireTree)//callback to rerender when state will change

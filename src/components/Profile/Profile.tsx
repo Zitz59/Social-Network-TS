@@ -4,17 +4,15 @@ import MyPostsContainer from '../MyPosts/MyPostsContainer';
 import {ReduxStoreType} from '../../redux/redux-store';
 
 
-type ProfilePropsType = {
+// type ProfilePropsType = {
     // posts: Array<PostsType>
     // addPost: (PostMessage: string) => void
     // newPostText: string
     // changeNewPostText: (newText: string) => void
     // dispatch:(action:ActionTypes)=>void
-    store:ReduxStoreType
+    // store:ReduxStoreType}
 
-}
-
-const Profile = (props: ProfilePropsType) => {
+const Profile = (/*props: ProfilePropsType*/) => {
     debugger
     return (
         <div>
@@ -24,7 +22,7 @@ const Profile = (props: ProfilePropsType) => {
                     alt=""/>
             </div>
             <div>
-                <MyPostsContainer store={props.store}
+                <MyPostsContainer /*store={props.store}*/
                                   // posts={props.posts}
                          // addPost={props.addPost}
                          // newPostText={props.newPostText}
