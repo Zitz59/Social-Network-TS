@@ -1,4 +1,3 @@
-import {DialogsPageType, MessageType,} from './store';
 import {ActionTypes} from './store';
 
 type dialogsReducerType = AddMessageACType | UpdateNewMessageACType
@@ -7,10 +6,29 @@ type AddMessageACType = ActionTypes
 
 type UpdateNewMessageACType = ActionTypes
 
-type initialStateType = DialogsPageType
+export type initialStateType = typeof initialState
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageText: string
+
+}
+
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessageType = {
+    id: number
+    message: string
+}
 
 
-let initialState:initialStateType = {
+
+
+let initialState = {
 
     dialogs: [
         {id: 1, name: 'Alexey'},
@@ -20,7 +38,7 @@ let initialState:initialStateType = {
         {id: 5, name: 'Max'},
         {id: 6, name: 'Stanz Wizard'},
         {id: 7, name: 'Dima'}
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Where is my money?'},
@@ -29,12 +47,12 @@ let initialState:initialStateType = {
         {id: 5, message: 'Learn React!'},
         {id: 6, message: 'How are you?'},
         {id: 7, message: 'Yo!'},
-    ],
+    ] as Array<MessageType>,
     newMessageText: ''
 }
 
 
-const dialogsReducer = (state=initialState, action: dialogsReducerType) => {
+const dialogsReducer = (state=initialState, action: dialogsReducerType):initialStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MessageType = {

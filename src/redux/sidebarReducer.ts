@@ -1,8 +1,15 @@
-import {SidebarType} from './store';
 
-type InitialStateType = Array <SidebarType>
 
-let initialState: InitialStateType =
+export type SidebarType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+
+type InitialStateType = typeof initialState
+
+let initialState =
     [{
         id: 1,
         name: 'Alexey',
@@ -17,7 +24,7 @@ let initialState: InitialStateType =
             id: 3,
             name: 'Maria',
             avatar: 'https://media.istockphoto.com/vectors/cartoon-young-girl-face-vector-illustration-of-beautiful-woman-avatar-vector-id923639308?b=1&k=20&m=923639308&s=170667a&w=0&h=dNz54KGP6e7MSDib2X6eGkbw4g-JLSdQaBp3pleK88M='
-        }]
+        }] as Array<SidebarType>
 
 
 export const sidebarReducer = (state = initialState) => {
