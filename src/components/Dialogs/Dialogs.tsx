@@ -2,27 +2,28 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsType, MessageType} from '../../redux/store';
+import {DialogsType, MessageType} from '../../redux/dialogsReducer';
+import {DialogPropsType} from './DialogsContainer';
 
 
-type DialogsPropsType = {
-    addMessage: (newMessageText: string) => void
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    onMessageChange: (newMessage: string) => void
-    newMessageText: string
-}
+// type DialogsPropsType = {
+//     addMessage: (newMessageText: string) => void
+//     dialogs: Array<DialogsType>
+//     messages: Array<MessageType>
+//     onMessageChange: (newMessage: string) => void
+//     newMessageText: string
+// }
 
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs = (props: DialogPropsType) => {
 
-    let dialogsElements = props.dialogs.map((dialog) => <DialogItem name={dialog.name} id={dialog.id}
+    let dialogsElements = props.dialogsPage.dialogs.map((dialog) => <DialogItem name={dialog.name} id={dialog.id}
                                                                     key={dialog.id}/>);
-    let messagesElements = props.messages.map((message) => <Message message={message.message} key={message.id}/>)
+    let messagesElements = props.dialogsPage.messages.map((message) => <Message message={message.message} key={message.id}/>)
 
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addMessage = () => {
-        props.addMessage(props.newMessageText)
+        props.addMessage(props.dialogsPage.newMessageText)
     }
 
     let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -31,7 +32,7 @@ const Dialogs = (props: DialogsPropsType) => {
     }
 
 
-    let newMessage = props.newMessageText
+    let newMessage = props.dialogsPage.newMessageText
 
     return (
         <div className={styles.dialogs}>
