@@ -1,23 +1,23 @@
 import profileReducer, {addPostAC, onPostChangeAC} from './profileReducer';
 import dialogsReducer, {addMessageAC, onMessageChangeAC} from './dialogsReducer';
 
-export type MessageType = {
+ type MessageType = {
     id: number
     message: string
 }
 
-export type DialogsType = {
+ type DialogsType = {
     id: number
     name: string
 }
 
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
 }
 
-export type DialogsPageType = {
+ type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newMessageText: string
@@ -29,19 +29,19 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sideBar: SidebarType[]
 }
 
-export type SidebarType = {
+ type SidebarType = {
     id: number
     name: string
     avatar: string
 }
 
-export type  StoreType = {
+ type  StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _onChange: () => void
