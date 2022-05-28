@@ -43,7 +43,6 @@ import {Dispatch} from 'redux';
 // }
 
 export type MapStateToPropsType = {
-    // profilePage: InitialStateType
     posts: Array<PostsType>
     newPostText: string
 }
