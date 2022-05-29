@@ -26,8 +26,6 @@ export type MessageType = {
 }
 
 
-
-
 let initialState = {
 
     dialogs: [
@@ -51,26 +49,21 @@ let initialState = {
     newMessageText: ''
 }
 
-
 const dialogsReducer = (state=initialState, action: dialogsReducerType):initialStateType => {
+//another realization deep copy of state
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MessageType = {
                 id: 5,
                 message: action.dialogMessage,
             };
-            let stateCopy = {...state}
-            stateCopy.messages.push(newMessage);
-            stateCopy.newMessageText = '';
-            return stateCopy;
-        case 'UPDATE-NEW-MESSAGE': {
-            let stateCopy = {...state}
-            stateCopy.newMessageText = action.newMessage;
-            return stateCopy;
-        }
+            return  {...state,
+                newMessageText: '',
+                messages: [...state.messages,newMessage]}
+        case 'UPDATE-NEW-MESSAGE':
+             return  {...state,newMessageText: action.newMessage}
         default:
             return state;
-
     }
 }
 
@@ -85,9 +78,5 @@ export const onMessageChangeAC = (newMessage: string) => {
         type: 'UPDATE-NEW-MESSAGE', newMessage: newMessage
     } as const
 }
-
-
-
-
 
 export default dialogsReducer;

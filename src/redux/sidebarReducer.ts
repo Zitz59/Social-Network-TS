@@ -1,11 +1,8 @@
-
-
 export type SidebarType = {
     id: number
     name: string
     avatar: string
 }
-
 
 type InitialStateType = typeof initialState
 
@@ -27,7 +24,7 @@ let initialState =
         }] as Array<SidebarType>
 
 
-export const sidebarReducer = (state = initialState) => {
+export const sidebarReducer = (state = initialState):InitialStateType => {
 
     return state
 }
