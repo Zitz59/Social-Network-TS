@@ -1,8 +1,6 @@
-import {ActionTypes, ProfilePageType} from './store';
-
+import {ActionTypes} from './store';
 
 export type ProfileReducerType = AddPostACType | UpdateNewPostACType
-
 export type AddPostACType = ActionTypes
 export type UpdateNewPostACType = ActionTypes
 export type InitialStateType = typeof initialState
@@ -21,7 +19,6 @@ let initialState = {
     newPostText: ''
 }
 
-
 const profileReducer = (state = initialState, action: ProfileReducerType):InitialStateType => {
 
     switch (action.type) {
@@ -31,21 +28,15 @@ const profileReducer = (state = initialState, action: ProfileReducerType):Initia
                 message: action.postMessage,
                 likesCount: 0
             };
-            let stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
-            stateCopy.posts.push(newPost);
-            stateCopy.newPostText = '';
-            return stateCopy;
+            return {...state,
+                posts:[...state.posts,newPost],newPostText:''};
 
         case 'UPDATE-NEW-POST-TEXT': {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
+            return {...state,
+            newPostText: action.newText}
         }
         default:
             return state;
-
-
     }
 }
 
@@ -60,6 +51,5 @@ export const onPostChangeAC = (newText: string) => {
         type: 'UPDATE-NEW-POST-TEXT', newText: newText
     } as const
 }
-
 
 export default profileReducer;
