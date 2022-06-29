@@ -1,5 +1,21 @@
-.userAvatar{
+.userBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.userAvatar {
     width: 150px;
-    height: 200px;
+    height: 150px;
     background-size: cover;
+}
+
+.userContainer {
+    margin-right: 10px;
+}
+
+.getUserButton {
+    width: 100px;
+    height: 20px;
 }
