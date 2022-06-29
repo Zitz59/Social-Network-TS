@@ -6,36 +6,41 @@ test('correct user should be followed', () => {
         users: [
             {
                 id: 1,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: true,
-                fullName: 'Sohan',
+                name: 'Sohan',
                 status: 'Learn react !!!',
                 location: {city: 'Tel-a-Viv', country: 'Israel'}
             },
             {
                 id: 2,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: false,
-                fullName: 'Ivan',
+                name: 'Ivan',
                 status: 'Drinking vodka and fuck with geese',
                 location: {city: 'Moscow', country: 'Russia'}
             },
             {
                 id: 3,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: true,
-                fullName: 'Kunigunda',
+                name: 'Kunigunda',
                 status: 'I am very busy',
                 location: {city: 'Denmark', country: 'København'}
             },
             {
                 id: 4,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: false,
-                fullName: 'John',
+                name: 'John',
                 status: 'Do it yourself',
                 location: {city: 'Texas', country: 'USA'}
             },
             {
                 id: 5,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: true,
-                fullName: 'Elena',
+                name: 'Elena',
                 status: 'Chill',
                 location: {city: 'Male', country: 'Maldives'}
             }
@@ -57,22 +62,25 @@ test('correct user should be unfollowed', () => {
         users: [
             {
                 id: 1,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: true,
-                fullName: 'Sohan',
+                name: 'Sohan',
                 status: 'Learn react !!!',
                 location: {city: 'Tel-a-Viv', country: 'Israel'}
             },
             {
                 id: 2,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: false,
-                fullName: 'Ivan',
+                name: 'Ivan',
                 status: 'Drinking vodka and fuck with geese',
                 location: {city: 'Moscow', country: 'Russia'}
             },
             {
                 id: 3,
+                photos: {small: 'Eltsyn_face.png'},
                 followed: true,
-                fullName: 'Kunigunda',
+                name: 'Kunigunda',
                 status: 'I am very busy',
                 location: {city: 'Denmark', country: 'København'}
             }
