@@ -1,58 +1,29 @@
 import React from 'react';
 import {UsersPropsType} from './UsersContainer';
-import styles from './Users.module.css'
+import styles from './Users.module.css';
+import userPhoto from '../../assets/images/user.png'
+import axios from 'axios';
 
 
 function Users(props: UsersPropsType) {
-    if (props.usersPage.users.length === 0) {
-        props.setUsers([{
-                id: 1,
-                avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf-PMRzWvRVGLKcnx-a_xVWCfSH3p0TlzYkQ&usqp=CAU',
-                followed: true,
-                fullName: 'Zohan',
-                status: 'Learn react !!!',
-                location: {city: 'Tel-a-Viv', country: 'Israel'}
-            },
-                {
-                    id: 2,
-                    avatarUrl: 'https://www.meme-arsenal.com/memes/3a8f7ff2e129a15f05bf74dbd78901c0.jpg',
-                    followed: false,
-                    fullName: 'Ivan',
-                    status: 'Drinking vodka and fuck with geese',
-                    location: {city: 'Moscow', country: 'Russia'}
-                },
-                {
-                    id: 3,
-                    followed: true,
-                    fullName: 'Kunigunda',
-                    status: 'I am very busy',
-                    location: {city: 'Denmark', country: 'København'}
-                },
-                {
-                    id: 4,
-                    followed: false,
-                    fullName: 'John',
-                    status: 'Do it yourself',
-                    location: {city: 'Texas', country: 'USA'}
-                },
-                {
-                    id: 5,
-                    followed: true,
-                    fullName: 'Elena',
-                    status: 'Chill',
-                    location: {city: 'Male', country: 'Maldives'}
-                }
-            ]
-        )
+    let getUsers = () => {
+        if (props.usersPage.users.length === 0) {
+            debugger
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
 
-    return <div>
+    return <div className={styles.userBlock}>
+        <button className={styles.getUserButton} onClick={getUsers}>Get users</button>
         {
-            props.usersPage.users.map(u => <div key={u.id}>
+            props.usersPage.users.map(u => <div key={u.id} className={styles.userContainer}>
                 <span>
                     <div>
-                        <img src={u.avatarUrl} className={styles.userAvatar} alt=""/>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.userAvatar}
+                             alt=""/>
                     </div>
                     <div>{u.followed
                         ? <button onClick={() => {
@@ -64,11 +35,11 @@ function Users(props: UsersPropsType) {
                     </div>
                 </span>
                 <span>
-                    <span><div>{u.fullName}</div>
+                    <span><div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
-                    <span><div>{u.location.country}</div>
-                        <div>{u.location.city}</div></span>
+                    <span><div>{'u.location.country'}</div>
+                        <div>{'u.location.city'}</div></span>
                 </span>
             </div>)
         }
