@@ -1,8 +1,9 @@
 import {followAC, unFollowAC, UsersInitialStateType, usersReducer} from './users-reducer';
 
-test('correct user should be followed', () => {
+let startState: UsersInitialStateType
 
-    const startState: UsersInitialStateType = {
+beforeEach(() => {
+    startState = {
         users: [
             {
                 id: 1,
@@ -46,6 +47,11 @@ test('correct user should be followed', () => {
             }
         ]
     }
+})
+
+
+test('correct user should be followed', () => {
+
     const action = followAC(2)
 
     const endState = usersReducer(startState, action)
@@ -58,34 +64,6 @@ test('correct user should be followed', () => {
 
 test('correct user should be unfollowed', () => {
 
-    const startState: UsersInitialStateType = {
-        users: [
-            {
-                id: 1,
-                photos: {small: 'Eltsyn_face.png'},
-                followed: true,
-                name: 'Sohan',
-                status: 'Learn react !!!',
-                location: {city: 'Tel-a-Viv', country: 'Israel'}
-            },
-            {
-                id: 2,
-                photos: {small: 'Eltsyn_face.png'},
-                followed: false,
-                name: 'Ivan',
-                status: 'Drinking vodka and fuck with geese',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 3,
-                photos: {small: 'Eltsyn_face.png'},
-                followed: true,
-                name: 'Kunigunda',
-                status: 'I am very busy',
-                location: {city: 'Denmark', country: 'København'}
-            }
-        ]
-    }
     const action = unFollowAC(3)
 
     const endState = usersReducer(startState, action)
@@ -95,10 +73,3 @@ test('correct user should be unfollowed', () => {
     expect(endState['users'][3].followed).toBe(false)
 
 })
-
-
-
-
-
-
-
