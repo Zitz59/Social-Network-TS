@@ -13,6 +13,7 @@ beforeEach(() => {
                 status: 'Learn react !!!',
                 location: {city: 'Tel-a-Viv', country: 'Israel'}
             },
+
             {
                 id: 2,
                 photos: {small: 'Eltsyn_face.png'},
@@ -45,7 +46,9 @@ beforeEach(() => {
                 status: 'Chill',
                 location: {city: 'Male', country: 'Maldives'}
             }
-        ]
+        ], pageSize: 5,
+        totalUsersCount: 5,
+        currentPage: 1
     }
 })
 
