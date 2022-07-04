@@ -1,6 +1,6 @@
 .userBlock {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: normal;
 }
@@ -18,4 +18,25 @@
 .getUserButton {
     width: 100px;
     height: 20px;
+}
+
+.selectedPage{
+    color: #99D3FF;
+    font-weight: bold;
+}
+
+.pageNumberSpan{
+    max-width: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.usersContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: normal;
 }
