@@ -1,21 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {PostsType} from '../../redux/profileReducer';
 import {MyPostsPropsType} from './MyPostsContainer';
-
-
-
-// export type MyPostsPropsType = {
-//     posts: Array<PostsType>
-//     newPostText: string
-//     // dispatch: (action: ActionTypes) => void
-//     changeNewPostText: (newText: string) => void
-//     addPost: (newPostText: string) => void
-// }
-
-
-
 
 const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map((post) =>
@@ -39,10 +25,6 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     return (
         <div className={styles.content}>
-            <img className={styles.avatar}
-                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3IUfiPYzFAfU0OdNVBk3cNCfucV5HKcOEmg&usqp=CAU"
-                 alt=""/>
-            <div>avatar+description</div>
             <div className={styles.myPost}>
                 <h3>My posts</h3>
                 <div>
