@@ -1,14 +1,10 @@
-import {ActionTypes} from './store';
-
 type dialogsReducerType = AddMessageACType | UpdateNewMessageACType
 
-type AddMessageACType = ActionTypes
+type AddMessageACType = ReturnType<typeof addMessage>
 
-type UpdateNewMessageACType = ActionTypes
+type UpdateNewMessageACType = ReturnType<typeof updateNewMessage>
 
-export type initialStateType = typeof initialState
-
-export type DialogsPageType = {
+export type DialogsInitialStateType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newMessageText: string
@@ -25,8 +21,7 @@ export type MessageType = {
     message: string
 }
 
-
-let initialState = {
+let initialState: DialogsInitialStateType = {
 
     dialogs: [
         {id: 1, name: 'Alexey'},
@@ -49,7 +44,7 @@ let initialState = {
     newMessageText: ''
 }
 
-const dialogsReducer = (state=initialState, action: dialogsReducerType):initialStateType => {
+export const dialogsReducer = (state = initialState, action: dialogsReducerType): DialogsInitialStateType => {
 //another realization deep copy of state
     switch (action.type) {
         case 'ADD-MESSAGE':
@@ -57,26 +52,19 @@ const dialogsReducer = (state=initialState, action: dialogsReducerType):initialS
                 id: 5,
                 message: action.dialogMessage,
             };
-            return  {...state,
+            return {
+                ...state,
                 newMessageText: '',
-                messages: [...state.messages,newMessage]}
+                messages: [...state.messages, newMessage]
+            }
         case 'UPDATE-NEW-MESSAGE':
-             return  {...state,newMessageText: action.newMessage}
+            return {...state, newMessageText: action.newMessage}
         default:
             return state;
     }
 }
 
-export const addMessageAC = (dialogMessage: string) => {
-    return {
-        type: 'ADD-MESSAGE', dialogMessage: dialogMessage
-    } as const
-}
+export const addMessage = (dialogMessage: string) => ({type: 'ADD-MESSAGE', dialogMessage: dialogMessage}) as const
 
-export const onMessageChangeAC = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE', newMessage: newMessage
-    } as const
-}
+export const updateNewMessage = (newMessage: string) => ({type: 'UPDATE-NEW-MESSAGE', newMessage: newMessage}) as const
 
-export default dialogsReducer;
