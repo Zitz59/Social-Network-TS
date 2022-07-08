@@ -2,17 +2,7 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsType, MessageType} from '../../redux/dialogsReducer';
 import {DialogPropsType} from './DialogsContainer';
-
-
-// type DialogsPropsType = {
-//     addMessage: (newMessageText: string) => void
-//     dialogs: Array<DialogsType>
-//     messages: Array<MessageType>
-//     onMessageChange: (newMessage: string) => void
-//     newMessageText: string
-// }
 
 const Dialogs = (props: DialogPropsType) => {
 
@@ -28,7 +18,7 @@ const Dialogs = (props: DialogPropsType) => {
 
     let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let changedMessage = e.currentTarget.value
-        props.onMessageChange(changedMessage)
+        props.updateNewMessage(changedMessage)
     }
 
 
