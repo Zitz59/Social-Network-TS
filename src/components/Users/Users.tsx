@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {UsersInitialStateType} from '../../redux/users-reducer';
+import {NavLink} from 'react-router-dom';
 
-export type UserPropsType = {
+type UserPropsType = {
 
     usersPage: UsersInitialStateType,
     onPageChanged: (pageNumber: number) => void,
@@ -37,8 +38,11 @@ const Users: React.FC<UserPropsType> = (props) => {
             props.usersPage.users.map(u => <div key={u.id} className={styles.userContainer}>
                 <span>
                     <div>
-                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.userAvatar}
-                             alt=""/>
+                        <NavLink to={'/profile' + u.id}>
+                            <img src={u.photos.small !== null ? u.photos.small : userPhoto}
+                                 className={styles.userAvatar}
+                                 alt=""/>
+                        </NavLink>
                     </div>
                     <div>{u.followed
                         ? <button onClick={() => {
