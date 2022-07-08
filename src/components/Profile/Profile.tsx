@@ -1,21 +1,13 @@
 import React from 'react';
-import MyPostsContainer, {MapStateToPropsType} from '../MyPosts/MyPostsContainer';
-import {ReduxStoreType} from '../../redux/redux-store';
-import {InitialStateType} from '../../redux/profileReducer';
+import MyPostsContainer from '../MyPosts/MyPostsContainer';
+import {ProfileType} from '../../redux/profileReducer';
+import {ProfileInfo} from './ProfileInfo';
 
-type ProfilePropsType = {
-    // posts: Array<PostsType>
-    // addPost: (PostMessage: string) => void
-    // newPostText: string
-    // changeNewPostText: (newText: string) => void
-    // dispatch:(action:ActionTypes)=>void
-    // store:ReduxStoreType
+export type ProfilePropsType = {
+    profile: ProfileType
 }
 
-
-
-const Profile = () => {
-    debugger
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
             <div>
@@ -24,16 +16,9 @@ const Profile = () => {
                     alt=""/>
             </div>
             <div>
-                <MyPostsContainer
+                <ProfileInfo profile={props.profile}/>
+                <MyPostsContainer/>
 
-
-                    /*store={props.store}*/
-                                  // posts={props.posts}
-                         // addPost={props.addPost}
-                         // newPostText={props.newPostText}
-                         // changeNewPostText={props.changeNewPostText}
-                         // dispatch={props.dispatch}
-                 />
             </div>
         </div>
     )
