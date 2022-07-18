@@ -26,11 +26,13 @@
 }
 
 .pageNumberSpan{
-    max-width: 40px;
+    max-width: 400px;
+    max-height: 18px;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     cursor: pointer;
 }
 
