@@ -1,5 +1,5 @@
-import profileReducer, {addPostAC, onPostChangeAC} from './profileReducer';
-import dialogsReducer, {addMessageAC, onMessageChangeAC} from './dialogsReducer';
+// import profileReducer, {addPost, onPostChange} from './profileReducer';
+// import dialogsReducer, {addMessageAC, onMessageChangeAC} from './dialogsReducer';
 
  type MessageType = {
     id: number
@@ -112,19 +112,19 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         // this._state.sideBar=sidebarReducer(this._state.sideBar, action)
         this._onChange();
 
     }
 }
 
-export type ActionTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof onPostChangeAC>
-    | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof onMessageChangeAC>
+  type ActionTypes = {}
+ //    // ReturnType<typeof addPostAC>
+ //    // | ReturnType<typeof onPostChangeAC>
+ //    // | ReturnType<typeof addMessageAC>
+ //    // | ReturnType<typeof onMessageChangeAC>
 
 
-export default store;
+// export default store;
