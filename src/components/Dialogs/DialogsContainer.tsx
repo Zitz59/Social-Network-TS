@@ -5,6 +5,7 @@ import Dialogs from './Dialogs';
 import {connect} from 'react-redux'
 import {AppStateType} from '../../redux/redux-store';
 import {DialogsInitialStateType} from '../../redux/dialogsReducer';
+import {compose} from 'redux';
 
 export type MapStatePropsType = {
     dialogsPage: DialogsInitialStateType
@@ -21,7 +22,13 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {dialogsPage: state.dialogsPage}
 }
 
-const DialogsContainer = connect(mapStateToProps, {addMessage, updateNewMessage})(Dialogs);
+// const DialogsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage})(Dialogs);
+//
+//
+// export default DialogsContainer;
 
 
-export default DialogsContainer;
+
+export default compose<()=>JSX.Element>(
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage})
+)(Dialogs)
