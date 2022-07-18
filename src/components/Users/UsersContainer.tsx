@@ -12,6 +12,7 @@ import {AppStateType} from '../../redux/redux-store';
 import axios from 'axios';
 import Users from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
 
 export type MapStateToPropsType = {
     usersPage: UsersInitialStateType,
@@ -37,7 +38,9 @@ class UsersContainer extends React.Component<UsersContainerPropsType, UsersConta
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials:true})
+            .then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items);
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -47,7 +50,9 @@ class UsersContainer extends React.Component<UsersContainerPropsType, UsersConta
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials:true})
+            .then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
@@ -80,7 +85,11 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-const UserContainer = connect(mapStateToProps,
-    {follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer);
+// const UserContainer = connect(mapStateToProps,
+//     {follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer);
+//
+// export default UserContainer
 
-export default UserContainer
+export default compose<()=>JSX.Element>(
+    connect(mapStateToProps, {follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})
+)(UsersContainer)
