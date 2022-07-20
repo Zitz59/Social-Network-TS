@@ -1,4 +1,3 @@
-import React from 'react';
 
 import {addMessage,updateNewMessage} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
@@ -21,13 +20,6 @@ export type DialogPropsType = MapStatePropsType & MapDispatchPropsType
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {dialogsPage: state.dialogsPage}
 }
-
-// const DialogsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage})(Dialogs);
-//
-//
-// export default DialogsContainer;
-
-
 
 export default compose<()=>JSX.Element>(
     connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage})
