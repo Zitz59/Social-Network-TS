@@ -31,7 +31,6 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
     toggleInFollowingProgress: (isFetching: boolean, userId: number) => void,
-
 }
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -59,8 +58,6 @@ class UsersContainer extends React.Component<UsersContainerPropsType, UsersConta
     }
 
     render() {
-
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
