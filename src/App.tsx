@@ -10,6 +10,7 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Dialogs from './components/Dialogs/DialogsContainer';
+import PrimarySearchAppBar from './components/AppBar';
 
 export type AppPropsType = {
     store: ReduxStoreType
@@ -20,6 +21,7 @@ const App = (props: AppPropsType) => {
     return (
 
         <div className="app-wrapper">
+            <PrimarySearchAppBar/>
             <HeaderContainer/>
             <Navbar sideBar={props.state.sideBar}/>
             <div className="app-wrapper-content">
