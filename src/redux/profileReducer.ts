@@ -1,3 +1,7 @@
+import {Dispatch} from 'redux';
+import {AppStateType} from './redux-store';
+import {usersAPI} from '../api/api';
+
 export type AddPostACType = ReturnType<typeof addPost>
 export type UpdateNewPostACType = ReturnType<typeof updatePost>
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>
@@ -10,12 +14,25 @@ export type ProfileInitialStateType = {
     profile: ProfileType,
 }
 
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
 
 export type ProfileType = {
-    id: number,
-    fullName: string,
-    photos: { large: string },
+    photos: { large: string,  },
     aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
 }
 
 export type PostsType = {
@@ -31,10 +48,14 @@ let initialState: ProfileInitialStateType = {
     ],
     newPostText: '',
     profile: {
-        id: 1,
+        userId: 1,
+        lookingForAJob:true,
+        lookingForAJobDescription: 'ahhahahahaa',
         fullName: 'Joker',
         photos: {large: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dark-knight-joker-1597655811.png?crop=0.495xw:1.00xh;0.417xw,0&resize=640:*'},
-        aboutMe: 'Do I Look Like a Guy with a Plan?'
+        aboutMe: 'Do I Look Like a Guy with a Plan?',
+        contacts:{github:'joker31',facebook:'Joker31',instagram:'Joker31',
+            mainLink:'Joker31',twitter:'Joker31',vk:'Joker31',website:'www.Joker31.com',youtube:'Joker31'}
     }
 }
 
@@ -51,7 +72,6 @@ const profileReducer = (state = initialState, action: ProfileReducerType): Profi
                 ...state,
                 posts: [...state.posts, newPost], newPostText: ''
             };
-
         case 'UPDATE-NEW-POST-TEXT': {
             return {
                 ...state,
@@ -72,4 +92,12 @@ export const updatePost = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', n
 
 export const setUserProfile = (profile: ProfileType) => ({type: 'SET-USER-PROFILE', profile}) as const
 
+export const getUserProfile = (userId: number) => {
+    return (dispatch: Dispatch<ProfileReducerType>, getState: () => AppStateType) => {
+        usersAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data));
+            })
+    }
+}
 export default profileReducer;
