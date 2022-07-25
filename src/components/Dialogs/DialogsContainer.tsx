@@ -8,6 +8,7 @@ import {compose} from 'redux';
 
 export type MapStatePropsType = {
     dialogsPage: DialogsInitialStateType
+    isAuth:boolean
 }
 
 export type MapDispatchPropsType = {
@@ -18,7 +19,7 @@ export type MapDispatchPropsType = {
 export type DialogPropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {dialogsPage: state.dialogsPage}
+    return {dialogsPage: state.dialogsPage,isAuth:state.auth.isAuth}
 }
 
 export default compose<()=>JSX.Element>(
