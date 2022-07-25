@@ -13,13 +13,14 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
     return (
         <div>
-            <img className={styles.avatar}
-                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3IUfiPYzFAfU0OdNVBk3cNCfucV5HKcOEmg&usqp=CAU"
-                 alt=""/>
             <div>
-                <img alt={'profile_large_photo'} src={props.profile.photos.large}/>
-                <div>About me :{props.profile.aboutMe}</div>
+                <img className={styles.avatar} alt={'profile_large_photo'} src={props.profile.photos.large}/>
                 <div>fullName : {props.profile.fullName}</div>
+                <div>About me :{props.profile.aboutMe}</div>
+                <div>Looking for a job : {props.profile.lookingForAJobDescription}</div>
+                <div>Instagram : {props.profile.contacts.instagram}</div>
+                <div>Facebook : {props.profile.contacts.facebook}</div>
+                <div>Website : {props.profile.contacts.website}</div>
             </div>
         </div>
     )
