@@ -13,6 +13,7 @@ import {AppStateType} from '../../redux/redux-store';
 import Users from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
 
 export type MapStateToPropsType = {
@@ -49,7 +50,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType, UsersConta
     }
 
     onPageChanged = (pageNumber: number) => {
-
+        this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, this.props.pageSize)
 
     }
@@ -92,5 +93,5 @@ export default compose<() => JSX.Element>(
         toggleIsFetching,
         toggleInFollowingProgress,
         getUsers, follow, unfollow
-    })
+    }),WithAuthRedirect
 )(UsersContainer)
