@@ -29,7 +29,7 @@ const Users: React.FC<UserPropsType> = (props) => {
     return <div className={styles.userBlock}>
         <div className={styles.pageNumberSpan}>
             {pages.map(p => {
-                return <span className={props.currentPage === p ? styles.selectedPage : ' '}
+                return <span key={p} className={props.currentPage === p ? styles.selectedPage : ' '}
                              onClick={() => {
                                  props.onPageChanged(p)
                              }}>{p}</span>
@@ -46,12 +46,14 @@ const Users: React.FC<UserPropsType> = (props) => {
                         </NavLink>
                     </div>
                     <div>{u.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.unfollow(u.id)
-                        }}>Unfollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.follow(u.id)
-                        }}>Follow</button>}
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                  onClick={() => {
+                                      props.unfollow(u.id)
+                                  }}>Unfollow</button>
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                  onClick={() => {
+                                      props.follow(u.id)
+                                  }}>Follow</button>}
                     </div>
                 </span>
                 <span>
