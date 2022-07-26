@@ -1,10 +1,11 @@
-
 import {addMessage,updateNewMessage} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux'
 import {AppStateType} from '../../redux/redux-store';
 import {DialogsInitialStateType} from '../../redux/dialogsReducer';
 import {compose} from 'redux';
+import React from 'react';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
 export type MapStatePropsType = {
     dialogsPage: DialogsInitialStateType
@@ -23,5 +24,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default compose<()=>JSX.Element>(
-    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage})
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {addMessage, updateNewMessage}),
+    WithAuthRedirect
 )(Dialogs)
