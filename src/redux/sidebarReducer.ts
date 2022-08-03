@@ -9,22 +9,29 @@ type InitialStateType = typeof initialState
 let initialState =
     [{
         id: 1,
-        name: 'Antonius Block',
-        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWTetpXuW5y9MgX063lA3pYmNRgIiasWqTow&usqp=CAU'
+        name: 'Blind Joe',
+        avatar: 'https://media.istockphoto.com/videos/portrait-of-highland-straight-fluffy-cat-with-long-hair-and-round-in-video-id1161210058?b=1&k=20&m=1161210058&s=640x640&h=6xaspkyiUJFWYmjGCPaA8D5G2eHyf6r2qVcKv4KHJGc='
     },
         {
             id: 2,
             name: 'Ions',
-            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHVc48I1DV-C9AqL2887a1emxWmko1RKIWBZp9MQtgGfwENC-J4or7EF8Weg5JAo_nKOY&usqp=CAU'
+            avatar: 'https://bestlifeonline.com/wp-content/uploads/sites/3/2019/02/shutterstock_161064191.jpg?quality=82&strip=1&resize=640%2C360'
         },
         {
             id: 3,
-            name: 'Kunigunda',
-            avatar: 'https://media.istockphoto.com/vectors/cartoon-young-girl-face-vector-illustration-of-beautiful-woman-avatar-vector-id923639308?b=1&k=20&m=923639308&s=170667a&w=0&h=dNz54KGP6e7MSDib2X6eGkbw4g-JLSdQaBp3pleK88M='
-        }] as Array<SidebarType>
+            name: 'Philosopher',
+            avatar: 'https://wl-brightside.cf.tsp.li/resize/728x/jpg/e54/e78/30a24451a8ba30d37a3dfa888c.jpg'
+        },
+        {
+            id: 4,
+            name: 'Чмоня',
+            avatar: 'https://social-network.samuraijs.com/activecontent/images/users/25030/user.jpg?v=0'
 
+        }
+    ] as Array<SidebarType>
 
-export const sidebarReducer = (state = initialState):InitialStateType => {
+//https://social-network.samuraijs.com/activecontent/images/users/25030/user.jpg?v=0
+export const sidebarReducer = (state = initialState): InitialStateType => {
 
     return state
 }
