@@ -1,22 +1,22 @@
 import React from 'react';
 import {ProfileType} from '../../redux/profileReducer';
-import {ProfileInfo} from './ProfileInfo';
+import {ProfileInfo} from '../ProfileInfo/ProfileInfo';
 import MyPosts from '../MyPosts/MyPostsContainer';
 
 export type ProfilePropsType = {
     profile: ProfileType
 }
 
-const Profile: React.FC<ProfilePropsType> = (props) => {
+export type ProfileStatusType = {
+    status:string
+    updateStatus:(status:string)=>void
+}
+
+const Profile: React.FC<ProfilePropsType & ProfileStatusType> = (props) => {
     return (
         <div>
             <div>
-                <img
-                    src="https://images.unsplash.com/photo-1615678815958-5910c6811c25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                    alt=""/>
-            </div>
-            <div>
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo updateStatus={props.updateStatus} status={props.status} profile={props.profile} />
                 <MyPosts/>
 
             </div>
