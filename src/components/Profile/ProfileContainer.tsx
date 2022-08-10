@@ -2,10 +2,10 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
-import {ProfileType, getUserProfile} from '../../redux/profileReducer';
+import {ProfileType, getUserProfile, getUserStatus, updateStatus} from '../../redux/profileReducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+
 
 export type PathParamsType = {
     userId: string
@@ -14,11 +14,14 @@ export type PathParamsType = {
 type MapStateToPropsType = {
     profile: ProfileType
     isAuth:boolean
+    status:string
 }
 
 type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
     getUserProfile: (userId:number)=> void
+    getUserStatus:(userId:number) =>void
+    updateStatus:(status:string)=>void
 }
 
 export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -33,12 +36,13 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = this.props.profile.userId
         }
         this.props.getUserProfile(Number(userId))
+        this.props.getUserStatus(Number(userId))
     }
 
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -46,7 +50,8 @@ class ProfileContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth:state.auth.isAuth
+    isAuth:state.auth.isAuth,
+    status:state.profilePage.status
 })
 
-export default  compose<()=>JSX.Element>( connect(mapStateToProps, {getUserProfile}),withRouter,WithAuthRedirect)(ProfileContainer)
+export default  compose<()=>JSX.Element>( connect(mapStateToProps, {getUserProfile,getUserStatus,updateStatus}),withRouter)(ProfileContainer)
