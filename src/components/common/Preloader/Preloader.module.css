@@ -1,0 +1,16 @@
+.preloaderBlock{
+    min-width: 800px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 150px;
+}
+
+.preloaderInner {
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+
+}
