@@ -1,15 +1,15 @@
 .content {
     grid-area: content;
-    background-color: #FF8978;
-
+    background-color: #04c4ff;
+    border-radius: 15px;
     padding: 10px;
 
 }
 
 .avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 35px;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
 }
 
 .addPostArea {
