@@ -1,48 +1,45 @@
+import {useForm} from 'react-hook-form';
 import s from './Login.module.css';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import React from 'react';
 
-export type FormDataType = {
-    login: string
-    password: string
-    rememberMe: boolean
+type FormData = {
+    email:string,
+    password:string,
+    rememberMe:boolean
 }
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const Login = () => {
+    const {register, setValue, handleSubmit, formState: {errors}} = useForm<FormData>();
+    const onSubmit = (data: FormData) => {
+        console.log('RESULT', data);
+        alert(JSON.stringify(data));
+    };
+    console.log(errors);
     return (
-        <form className={s.loginContainer} onSubmit={props.handleSubmit}>
-            <div>
-                <Field className={s.input} placeholder={'login'} name={'login'} component={'input'}/>
-            </div>
-            <div>
-                <Field className={s.input} placeholder={'password'} name={'password'} component={'input'}/>
-            </div>
-            <div>
-                <Field className={s.input} component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
-            </div>
-            <button className={s.button}>Login</button>
-        </form>
-    )
-}
-
-
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-
-
-const Login = () => {
-    const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
-    }
-    return (
-
         <div className={s.blockContainer}>
-            <div className={s.loginContainer}>
+            <form className={s.loginContainer} onSubmit={handleSubmit(onSubmit)}>
                 <h1 className={s.loginTitle}>Login</h1>
-                <LoginReduxForm onSubmit={onSubmit}/>
-            </div>
+                <div>
+                    <input type={'text'}
+                           className={s.input}
+                           placeholder={'email'}
+                           {...register('email', {
+                               required: true,
+                               pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                           })}/>
+                </div>
+                <div>
+
+                    <input className={s.input}
+                           placeholder={'password'}
+                           {...register('password', {required: true, maxLength: 80})}/>
+                </div>
+                <div>
+                    <input className={s.input} name={'rememberMe'} type={'checkbox'}/> remember me
+                </div>
+                <button className={s.button}>Login</button>
+            </form>
         </div>
 
     )
 }
-
-export default Login
