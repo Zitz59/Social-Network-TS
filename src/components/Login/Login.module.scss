@@ -1,0 +1,56 @@
+@import "src/common/styles/sass/mixins.scss";
+@import "src/common/styles/sass/variables";
+
+.blockContainer {
+  margin-top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .loginContainer {
+    color: $primaryColor;
+    background: $secondaryColor;
+    border-radius: 15px;
+    width: 210px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    .input {
+      height: 25px;
+      margin: 0 10px 0 10px;
+      padding: 0;
+      border-radius: 5px;
+      border-color: $secondaryColor;
+      outline: none;
+    }
+  }
+
+  .buttonBlock {
+    display: flex;
+    justify-content: center;
+
+    .button {
+      width: 100%;
+      font-size: 18px;
+      background: $primaryColor;
+      color: #ffffff;
+      height: 30px;
+      margin: 10px;
+      border-radius: 12px;
+      align-items: center;
+    }
+  }
+}
+
+
+.loginTitle {
+  text-align: center;
+}
+
+.errorTitle {
+  @include title(center);
+  color: crimson;
+}
