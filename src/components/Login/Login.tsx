@@ -1,6 +1,9 @@
 import {SubmitHandler, useForm} from 'react-hook-form';
 import s from './Login.module.scss';
 import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 type FormData = {
     email: string,
@@ -9,6 +12,14 @@ type FormData = {
 }
 
 export const Login = () => {
+
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+
+    if (isLoggedIn){
+        return <Redirect to="/"/>
+    }
+
     const {register, setValue, handleSubmit, formState: {errors}, reset} = useForm<FormData>();
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log('RESULT', data);
@@ -35,6 +46,7 @@ export const Login = () => {
                 </div>
                 <div className={s.input}>
                     <input className={s.input}
+                           type='password'
                            placeholder={'Password'}
                            {...register('password',
                                {
