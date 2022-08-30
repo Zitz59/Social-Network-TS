@@ -1,4 +1,4 @@
-type dialogsReducerType = AddMessageACType | UpdateNewMessageACType
+export type dialogsReducerType = AddMessageACType | UpdateNewMessageACType
 
 type AddMessageACType = ReturnType<typeof addMessage>
 
