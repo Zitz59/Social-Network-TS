@@ -4,11 +4,13 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
+import {login} from "../../redux/auth-reducer";
 
 type FormData = {
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe?: boolean
+    captcha?:boolean
 }
 
 export const Login = () => {
@@ -16,18 +18,20 @@ export const Login = () => {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
-    if (isLoggedIn){
-        return <Redirect to="/"/>
-    }
 
-    const {register, setValue, handleSubmit, formState: {errors}, reset} = useForm<FormData>();
+
+    const {register, handleSubmit, formState: {errors}, reset} = useForm<FormData>();
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log('RESULT', data);
-        alert(JSON.stringify(data));
+        // alert(JSON.stringify(data));
+        dispatch(login(data.email,data.password))
         reset()
 
     };
     console.log(errors);
+    if (isLoggedIn){
+        return <Redirect from="/login" to="/profile"/>
+    }
     return (
         <div className={s.blockContainer}>
             <form className={s.loginContainer} onSubmit={handleSubmit(onSubmit)}>
