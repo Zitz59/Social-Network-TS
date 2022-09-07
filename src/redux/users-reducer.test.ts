@@ -1,4 +1,4 @@
-import {follow, unFollow, UsersInitialStateType, usersReducer} from './users-reducer';
+import {follow, unfollow, UsersInitialStateType, usersReducer} from './users-reducer';
 
 let startState: UsersInitialStateType
 
@@ -69,7 +69,7 @@ test('correct user should be followed', () => {
 
 test('correct user should be unfollowed', () => {
 
-    const action = unFollow(3)
+    const action = unfollow(3)
 
     const endState = usersReducer(startState, action)
 
