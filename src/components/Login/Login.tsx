@@ -17,10 +17,12 @@ export const Login = () => {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+    const isStopSubmit = useSelector<AppStateType,boolean>(state => state.auth.isStopSubmit)
+    const stopSubmitMessage = useSelector<AppStateType,string>(state => state.auth.stopSubmitMessage)
 
 
 
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<FormData>();
+    const {register, handleSubmit, formState: {errors,isValid}, reset} = useForm<FormData>({mode:"onBlur"});
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log('RESULT', data);
         // alert(JSON.stringify(data));
@@ -30,6 +32,7 @@ export const Login = () => {
     };
     console.log(errors);
     if (isLoggedIn){
+        // @ts-ignore
         return <Redirect from="/login" to="/profile"/>
     }
     return (
@@ -39,8 +42,9 @@ export const Login = () => {
                 <div className={s.input}>
                     <input className={s.input} type={'text'}
                            placeholder={'Email'}
+                           defaultValue=''
                            {...register('email', {
-                               required: 'Please enter your e-mail',
+                               required: true,
                                pattern: {
                                    value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                    message: 'Please enter valid email!'
@@ -55,6 +59,10 @@ export const Login = () => {
                            {...register('password',
                                {
                                    required: 'Please enter your password',
+                                   minLength:{
+                                       value:10,
+                                       message:'Password min length must be 10 symbols'
+                                   },
                                    maxLength: {
                                        value: 80,
                                        message: 'Password max length is 80 symbols'
@@ -66,8 +74,9 @@ export const Login = () => {
                 <div>
                     <input name={'rememberMe'} type={'checkbox'}/> remember me
                 </div>
+                {isStopSubmit ? <div className={s.stopSubmit}>{stopSubmitMessage}</div> : <div className={s.stopSubmit}></div>}
                 <div className={s.buttonBlock}>
-                    <button className={s.button}>Login</button>
+                    <input className={s.button} type="submit" disabled={!isValid}/>
                 </div>
             </form>
         </div>
