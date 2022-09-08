@@ -7,7 +7,7 @@ export type UpdateNewPostACType = ReturnType<typeof updatePost>
 export type SetUserProfileACType = ReturnType<typeof setUserProfile>
 export type SetStatusType = ReturnType<typeof setStatus>
 
-type ProfileReducerType = AddPostACType | UpdateNewPostACType | SetUserProfileACType | SetStatusType
+export type ProfileReducerType = AddPostACType | UpdateNewPostACType | SetUserProfileACType | SetStatusType
 
 export type ProfileInitialStateType = {
     posts: Array<PostsType>,
