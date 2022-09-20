@@ -1,11 +1,10 @@
-import {Dispatch} from 'redux';
-import {authAPI} from '../api/api';
-import {AppThunk} from './redux-store';
+import { getAuthUserData} from './auth-reducer';
+import { AppThunk} from './redux-store';
 
-export type AuthReducerACType = ReturnType<typeof setAuthUserData> | ReturnType<typeof stopSubmit>
+export type AppReducerACType = ReturnType<typeof initializedSuccess>
 
 export type AppInitialStateType = {
-    initialized:boolean
+    initialized: boolean
 }
 
 let initialState: AppInitialStateType = {
@@ -13,74 +12,27 @@ let initialState: AppInitialStateType = {
 }
 
 export const appReducer = (state = initialState,
-                           action: AuthReducerACType): AppInitialStateType => {
+                           action: AppReducerACType): AppInitialStateType => {
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case 'INITIALIZED-SUCCESS':
             return {
                 ...state,
-                ...action.payload
+                initialized: true
             }
-        case 'STOP-SUBMIT': {
-            return {
-                ...state,
-                isStopSubmit: action.payload.isStopSubmit,
-                stopSubmitMessage: action.payload.stopSubmitMessage
-            }
-        }
         default:
             return state;
     }
 }
 
-export const setAuthUserData = (userId: number | null, email: string | null,
-                                login: string | null, isAuth: boolean) => ({
-    type: 'SET-USER-DATA',
-    payload: {userId, email, login, isAuth}
+export const initializedSuccess = () => ({
+    type: 'INITIALIZED-SUCCESS',
 } as const)
 
-export const stopSubmit = (isStopSubmit: boolean, stopSubmitMessage: string) => ({
-    type: 'STOP-SUBMIT',
-    payload: {isStopSubmit, stopSubmitMessage},
-} as const)
-
-export const getAuthUserData = () => {
-    return (dispatch: Dispatch<AuthReducerACType>) => {
-        authAPI.me()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let {id, email, login,} = response.data.data
-                    dispatch(setAuthUserData(id, email, login, true))
-                }
-            });
-    }
-}
-export const login = (email: string, password: string, rememberMe?: boolean,
-                      captcha?: boolean): AppThunk => {
+export const initializeApp = ():AppThunk => {
     return (dispatch) => {
-        authAPI.login(email, password, rememberMe, captcha)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                    dispatch(stopSubmit(false, ''))
-                } else {
-                    dispatch(stopSubmit(true, response.data.messages[0]))
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
-}
-
-export const logout = (): AppThunk => {
-    return (dispatch) => {
-        authAPI.logout()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false))
-                }
-            })
-            .catch(error =>
-                console.log(error))
+        let promise = dispatch(getAuthUserData())
+        promise.then(()=>{
+            dispatch(initializedSuccess())
+        })
     }
 }
