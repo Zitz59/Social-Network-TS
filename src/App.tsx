@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
@@ -11,19 +11,24 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Dialogs from './components/Dialogs/DialogsContainer';
 import {Login} from './components/Login/Login';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {getAuthUserData} from './redux/auth-reducer';
 
 export type AppPropsType = {
     store: ReduxStoreType
     state: AppStateType
+    getAuthUserData: () => void
 }
 
-class App extends React.Component<AppPropsType> {
-    render() {
-        // @ts-ignore
-        return (
+class App extends React.Component<AppPropsType > {
+    componentDidMount() {
+        this.props.getAuthUserData()
+    }
 
+    render() {
+        return (
             <div className="app-wrapper">
-                {/*<PrimarySearchAppBar/>*/}
                 <HeaderContainer/>
                 <Navbar sideBar={this.props.state.sideBar}/>
                 <div className="app-wrapper-content">
@@ -44,4 +49,6 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-export default App;
+export default compose <() => JSX.Element>(
+    withRouter,
+    connect(null, {getAuthUserData}))(App);
