@@ -13,17 +13,21 @@ import Dialogs from './components/Dialogs/DialogsContainer';
 import {Login} from './components/Login/Login';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {getAuthUserData} from './redux/auth-reducer';
+import {initializeApp} from './redux/app-reducer';
 
 export type AppPropsType = {
     store: ReduxStoreType
     state: AppStateType
-    getAuthUserData: () => void
+    initializeApp: () => void
 }
 
-class App extends React.Component<AppPropsType > {
+type MapStateToPropsType = {
+    initialized:boolean
+}
+
+class App extends React.Component<AppPropsType> {
     componentDidMount() {
-        this.props.getAuthUserData()
+        this.props.initializeApp()
     }
 
     render() {
@@ -49,6 +53,10 @@ class App extends React.Component<AppPropsType > {
     }
 }
 
-export default compose <() => JSX.Element>(
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    initialized:state.app.initialized
+})
+
+export default compose<() => JSX.Element>(
     withRouter,
-    connect(null, {getAuthUserData}))(App);
+    connect(mapStateToProps, {initializeApp}))(App);
